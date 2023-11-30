@@ -58,7 +58,7 @@ const Page = () => {
             <Link
               href={'https://rdt.li'}
               target="_blank"
-              className="mt-8 w-max rounded-xl border-2 border-amber-600 px-4 py-2 text-amber-600"
+              className="mt-8 w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
             >
               Visit Website
             </Link>
@@ -96,7 +96,7 @@ const Page = () => {
             <Link
               href={'https://serpwe.com'}
               target="_blank"
-              className="mt-8 w-max rounded-xl border-2 border-amber-600 px-4 py-2 text-amber-600"
+              className="mt-8 w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
             >
               Visit Website
             </Link>
@@ -134,12 +134,39 @@ const Page = () => {
             <Link
               href={'https://hetrolinks.com'}
               target="_blank"
-              className="mt-8 w-max rounded-xl border-2 border-amber-600 px-4 py-2 text-amber-600"
+              className="mt-8 w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
             >
               Visit Website
             </Link>
           </div>
         </div>
+      </div>
+
+      {
+        // ~ more from GitHub
+      }
+      <div className="mx-5 grid gap-8 border-t border-slate-300 py-20 md:grid-cols-2 lg:grid-cols-3">
+        <Link href="https://github.com/nrjdalal/shadcn-ui-snippets">
+          <div className="h-full rounded-lg border border-amber-600 p-5 font-medium">
+            <h2 className="text-xl md:text-2xl">Shadcn UI Snippets</h2>
+
+            <p className="pt-4 text-lg text-slate-500">
+              Simply import and use shadcn-ui components in your project
+            </p>
+          </div>
+        </Link>
+
+        <Link href="https://github.com/nrjdalal/shadcn-ui-snippets">
+          <div className="h-full rounded-lg border border-amber-600 p-5 font-medium">
+            <h2 className="text-xl md:text-2xl">Onset</h2>
+
+            <p className="pt-4 text-lg text-slate-500">
+              An open source Next.js bare starter with step-by-step instructions
+              if required. Built with Next.js 14, Drizzle (Postgres),
+              NextAuth/Auth.js
+            </p>
+          </div>
+        </Link>
       </div>
     </main>
   )
