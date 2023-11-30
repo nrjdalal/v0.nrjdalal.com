@@ -121,7 +121,7 @@ const Projects = ({
             <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
           </div>
           <Link href={href} target="_blank">
-            <Image src={src} alt={title} height={1080} width={720} />
+            <Image src={src} alt={title} height={586} width={440} />
           </Link>
         </div>
 
