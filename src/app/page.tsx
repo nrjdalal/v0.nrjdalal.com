@@ -42,8 +42,8 @@ const Page = () => {
             <Image
               src="/rdt.li.png"
               alt="Redirect Link"
-              width={1080}
-              height={1920}
+              height={1080}
+              width={720}
             />
           </div>
 
@@ -80,8 +80,8 @@ const Page = () => {
             <Image
               src="/serpwe.com.png"
               alt="Serpwe"
-              width={1080}
-              height={1920}
+              height={1080}
+              width={720}
             />
           </div>
 
@@ -118,8 +118,8 @@ const Page = () => {
             <Image
               src="/hetrolinks.com.png"
               alt="Serpwe"
-              width={1080}
-              height={1920}
+              height={1080}
+              width={720}
             />
           </div>
 
