@@ -149,11 +149,16 @@ const Page = () => {
         <GithubLinks
           href="https://github.com/nrjdalal/shadcn-ui-snippets"
           title="Shadcn UI Snippets"
+          type="VS Code Extension"
         >
           Simply import and use shadcn-ui components in your project
         </GithubLinks>
 
-        <GithubLinks href="https://github.com/nrjdalal/onset" title="Onset">
+        <GithubLinks
+          href="https://github.com/nrjdalal/onset"
+          title="Onset"
+          type="Starter Template"
+        >
           An open source Next.js bare starter with step-by-step instructions if
           required. Built with Next.js 14, Drizzle (Postgres), NextAuth/Auth.js
         </GithubLinks>
@@ -161,6 +166,7 @@ const Page = () => {
         <GithubLinks
           href="https://github.com/nrjdalal/JioTV-Next"
           title="JioTV"
+          type="Next.js App"
         >
           JioTV HD Streaming Free on Browser / Android / Android TV
         </GithubLinks>
@@ -174,17 +180,29 @@ export default Page
 const GithubLinks = ({
   href,
   title,
+  type,
   children,
 }: {
   href: string
   title: string
+  type: string
   children: React.ReactNode
 }) => {
   return (
     <Link href={href}>
-      <div className="h-full rounded-lg border border-amber-600 p-5 font-medium">
-        <h2 className="text-xl md:text-2xl">{title}</h2>
-        <p className="pt-4 text-lg text-slate-500">{children}</p>
+      <div className="h-full rounded-lg border border-slate-300 font-medium">
+        <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
+          <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
+          <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
+          <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
+        </div>
+        <div className="p-5">
+          <h2 className="text-xl md:text-2xl">{title}</h2>
+          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
+            {type}
+          </p>
+          <p className="pt-4 text-lg text-slate-500">{children}</p>
+        </div>
       </div>
     </Link>
   )
