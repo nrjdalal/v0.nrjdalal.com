@@ -29,122 +29,37 @@ const Page = () => {
       </div>
 
       {
-        // ~ rdt.li
+        // ~ Projects
       }
-      <div className="mx-5 flex flex-col border-t border-slate-300 lg:py-10">
-        <div className="grid gap-x-16 gap-y-12 py-20 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-lg border border-slate-300">
-            <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
-              <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
-              <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
-              <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
-            </div>
-            <Image
-              src="/rdt.li.png"
-              alt="Redirect Link"
-              height={1080}
-              width={720}
-            />
-          </div>
 
-          <div className="flex flex-col justify-center font-medium">
-            <h2 className="text-2xl md:text-3xl">Redirect Link</h2>
+      <Projects src="/rdt.li.png" href="https://rdt.li" title="Redirect Link">
+        <p>
+          rdt.li self hostable, feature rich, minimalistic and open source URL
+          shortener. Built with Next.js, Drizzle, NextAuth and Postgres.
+        </p>
+      </Projects>
 
-            <p className="pt-8 text-xl text-slate-500">
-              rdt.li self hostable, feature rich, minimalistic and open source
-              URL shortener. Built with Next.js, Drizzle, NextAuth and Postgres.
-            </p>
+      <Projects src="/serpwe.com.png" href="https://serpwe.com" title="Serpwe">
+        <p>
+          Generate keyword ideas, group similar keywords, and organize them into
+          topical clusters - a product of Warewe
+        </p>
+      </Projects>
 
-            <Link
-              href={'https://rdt.li'}
-              target="_blank"
-              className="mt-8 w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
-            >
-              Visit Website
-            </Link>
-          </div>
-        </div>
-      </div>
+      <Projects
+        src="/hetrolinks.com.png"
+        href="https://hetrolinks.com"
+        title="Hetrolinks"
+      >
+        <p>
+          Instantly Repair Broken Amazon Affiliate Links - a product of Warewe
+        </p>
+      </Projects>
 
       {
-        // ~ serpwe.com
+        // ~ Github
       }
-      <div className="mx-5 flex flex-col border-t border-slate-300 lg:py-10">
-        <div className="grid gap-x-16 gap-y-12 py-20 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-lg border border-slate-300">
-            <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
-              <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
-              <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
-              <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
-            </div>
-            <Image
-              src="/serpwe.com.png"
-              alt="Serpwe"
-              height={1080}
-              width={720}
-            />
-          </div>
 
-          <div className="flex flex-col justify-center font-medium">
-            <h2 className="text-2xl md:text-3xl">Serpwe</h2>
-
-            <p className="pt-8 text-xl text-slate-500">
-              Generate keyword ideas, group similar keywords, and organize them
-              into topical clusters - a product of Warewe
-            </p>
-
-            <Link
-              href={'https://serpwe.com'}
-              target="_blank"
-              className="mt-8 w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
-            >
-              Visit Website
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {
-        // ~ hetrolink.com
-      }
-      <div className="mx-5 flex flex-col border-t border-slate-300 lg:py-10">
-        <div className="grid gap-x-16 gap-y-12 py-20 lg:grid-cols-2">
-          <div className="overflow-hidden rounded-lg border border-slate-300">
-            <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
-              <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
-              <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
-              <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
-            </div>
-            <Image
-              src="/hetrolinks.com.png"
-              alt="Serpwe"
-              height={1080}
-              width={720}
-            />
-          </div>
-
-          <div className="flex flex-col justify-center font-medium">
-            <h2 className="text-2xl md:text-3xl">Hetrolinks</h2>
-
-            <p className="pt-8 text-xl text-slate-500">
-              Instantly Repair Broken Amazon Affiliate Links - a product of
-              Warewe
-            </p>
-
-            <Link
-              href={'https://hetrolinks.com'}
-              target="_blank"
-              className="mt-8 w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
-            >
-              Visit Website
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {
-        // ~ more from Github
-      }
       <div className="mx-5 grid gap-8 border-t border-slate-300 py-20 md:grid-cols-2 lg:grid-cols-3 lg:py-28">
         <GithubLinks
           href="https://github.com/nrjdalal/shadcn-ui-snippets"
@@ -185,6 +100,49 @@ const Page = () => {
 
 export default Page
 
+const Projects = ({
+  src,
+  href,
+  title,
+  children,
+}: {
+  src: string
+  href: string
+  title: string
+  children: React.ReactNode
+}) => {
+  return (
+    <div className="mx-5 flex flex-col border-t border-slate-300 lg:py-10">
+      <div className="grid gap-x-16 gap-y-12 py-20 lg:grid-cols-2">
+        <div className="overflow-hidden rounded-lg border border-slate-300">
+          <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
+            <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
+            <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
+            <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
+          </div>
+          <Link href={href} target="_blank">
+            <Image src={src} alt={title} height={1080} width={720} />
+          </Link>
+        </div>
+
+        <div className="flex flex-col justify-center font-medium">
+          <h2 className="text-2xl md:text-3xl">{title}</h2>
+
+          <div className="pt-8 text-xl text-slate-500">{children}</div>
+
+          <Link
+            href={href}
+            target="_blank"
+            className="mt-8 w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
+          >
+            Visit Website
+          </Link>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 const GithubLinks = ({
   href,
   title,
@@ -197,7 +155,7 @@ const GithubLinks = ({
   children: React.ReactNode
 }) => {
   return (
-    <Link href={href}>
+    <Link href={href} target="_blank">
       <div className="h-full rounded-lg border border-slate-300 font-medium">
         <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
           <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
