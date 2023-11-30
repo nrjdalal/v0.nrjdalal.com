@@ -143,33 +143,49 @@ const Page = () => {
       </div>
 
       {
-        // ~ more from GitHub
+        // ~ more from Github
       }
-      <div className="mx-5 grid gap-8 border-t border-slate-300 py-20 md:grid-cols-2 lg:grid-cols-3">
-        <Link href="https://github.com/nrjdalal/shadcn-ui-snippets">
-          <div className="h-full rounded-lg border border-amber-600 p-5 font-medium">
-            <h2 className="text-xl md:text-2xl">Shadcn UI Snippets</h2>
+      <div className="mx-5 grid gap-8 border-t border-slate-300 py-20 md:grid-cols-2 lg:grid-cols-3 lg:py-28">
+        <GithubLinks
+          href="https://github.com/nrjdalal/shadcn-ui-snippets"
+          title="Shadcn UI Snippets"
+        >
+          Simply import and use shadcn-ui components in your project
+        </GithubLinks>
 
-            <p className="pt-4 text-lg text-slate-500">
-              Simply import and use shadcn-ui components in your project
-            </p>
-          </div>
-        </Link>
+        <GithubLinks href="https://github.com/nrjdalal/onset" title="Onset">
+          An open source Next.js bare starter with step-by-step instructions if
+          required. Built with Next.js 14, Drizzle (Postgres), NextAuth/Auth.js
+        </GithubLinks>
 
-        <Link href="https://github.com/nrjdalal/shadcn-ui-snippets">
-          <div className="h-full rounded-lg border border-amber-600 p-5 font-medium">
-            <h2 className="text-xl md:text-2xl">Onset</h2>
-
-            <p className="pt-4 text-lg text-slate-500">
-              An open source Next.js bare starter with step-by-step instructions
-              if required. Built with Next.js 14, Drizzle (Postgres),
-              NextAuth/Auth.js
-            </p>
-          </div>
-        </Link>
+        <GithubLinks
+          href="https://github.com/nrjdalal/JioTV-Next"
+          title="JioTV"
+        >
+          JioTV HD Streaming Free on Browser / Android / Android TV
+        </GithubLinks>
       </div>
     </main>
   )
 }
 
 export default Page
+
+const GithubLinks = ({
+  href,
+  title,
+  children,
+}: {
+  href: string
+  title: string
+  children: React.ReactNode
+}) => {
+  return (
+    <Link href={href}>
+      <div className="h-full rounded-lg border border-amber-600 p-5 font-medium">
+        <h2 className="text-xl md:text-2xl">{title}</h2>
+        <p className="pt-4 text-lg text-slate-500">{children}</p>
+      </div>
+    </Link>
+  )
+}
