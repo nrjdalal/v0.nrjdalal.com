@@ -170,6 +170,14 @@ const Page = () => {
         >
           JioTV HD Streaming Free on Browser / Android / Android TV
         </GithubLinks>
+
+        <GithubLinks
+          href="https://github.com/nrjdalal/google-parser"
+          title="Google Parser"
+          type="npm package"
+        >
+          HTTP based Google Search Results scraper/parser
+        </GithubLinks>
       </div>
     </main>
   )
