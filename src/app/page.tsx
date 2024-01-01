@@ -29,9 +29,31 @@ const Page = () => {
       </div>
 
       {
+        // ~ Blog
+      }
+      <div className="mx-5 border-t border-slate-300 py-20  lg:py-28">
+        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl">
+          Blogs
+        </h2>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <BlogLinks
+            href="/blog/recommendations"
+            title="Recommendations"
+            type="Series, Movies & More"
+          >
+            I honestly believe you&apos;ll love some if not all of it ;)
+          </BlogLinks>
+
+          <BlogLinks href="/blog/fitness" title="Fitness" type="Journal">
+            My fitness journey, what I&apos;ve learned and what I&apos;ve done
+          </BlogLinks>
+        </div>
+      </div>
+
+      {
         // ~ Projects
       }
-
       <Projects src="/rdt.li.png" href="https://rdt.li" title="Redirect Link">
         <p>
           rdt.li self hostable, feature rich, minimalistic and open source URL
@@ -59,7 +81,6 @@ const Page = () => {
       {
         // ~ Github
       }
-
       <div className="mx-5 grid gap-8 border-t border-slate-300 py-20 md:grid-cols-2 lg:grid-cols-3 lg:py-28">
         <GithubLinks
           href="https://github.com/nrjdalal/shadcn-ui-snippets"
@@ -99,6 +120,37 @@ const Page = () => {
 }
 
 export default Page
+
+const BlogLinks = ({
+  href,
+  title,
+  type,
+  children,
+}: {
+  href: string
+  title: string
+  type: string
+  children: React.ReactNode
+}) => {
+  return (
+    <Link href={href}>
+      <div className="h-full rounded-lg border border-slate-300 font-medium">
+        <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
+          <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
+          <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
+          <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
+        </div>
+        <div className="p-5">
+          <h2 className="text-xl md:text-2xl">{title}</h2>
+          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
+            {type}
+          </p>
+          <p className="pt-4 text-lg text-slate-500">{children}</p>
+        </div>
+      </div>
+    </Link>
+  )
+}
 
 const Projects = ({
   src,
