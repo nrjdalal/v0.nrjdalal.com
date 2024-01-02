@@ -52,6 +52,60 @@ const Page = () => {
       </div>
 
       {
+        // ~ Github
+      }
+      <div className="mx-5 border-t border-slate-300 py-20  lg:py-28">
+        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl">
+          Github
+        </h2>
+
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <GithubLinks
+            href="https://github.com/nrjdalal/rdt-li"
+            title="rdt-li"
+            type="Next.js App"
+          >
+            rdt.li self hostable, feature rich, minimalistic and open source URL
+            shortener. Built with Next.js, Drizzle, NextAuth and Postgres
+          </GithubLinks>
+
+          <GithubLinks
+            href="https://github.com/nrjdalal/shadcn-ui-snippets"
+            title="Shadcn UI Snippets"
+            type="VS Code Extension"
+          >
+            Simply import and use shadcn-ui components in your project
+          </GithubLinks>
+
+          <GithubLinks
+            href="https://github.com/nrjdalal/onset"
+            title="Onset"
+            type="Starter Template"
+          >
+            An open source Next.js bare starter with step-by-step instructions
+            if required. Built with Next.js 14, Drizzle (Postgres),
+            NextAuth/Auth.js
+          </GithubLinks>
+
+          <GithubLinks
+            href="https://github.com/nrjdalal/JioTV-Next"
+            title="JioTV"
+            type="Next.js App"
+          >
+            JioTV HD Streaming Free on Browser / Android / Android TV
+          </GithubLinks>
+
+          <GithubLinks
+            href="https://github.com/nrjdalal/google-parser"
+            title="Google Parser"
+            type="npm package"
+          >
+            HTTP based Google Search Results scraper/parser
+          </GithubLinks>
+        </div>
+      </div>
+
+      {
         // ~ Projects
       }
       <Projects src="/rdt.li.png" href="https://rdt.li" title="Redirect Link">
@@ -77,44 +131,6 @@ const Page = () => {
           Instantly Repair Broken Amazon Affiliate Links - a product of Warewe
         </p>
       </Projects>
-
-      {
-        // ~ Github
-      }
-      <div className="mx-5 grid gap-8 border-t border-slate-300 py-20 md:grid-cols-2 lg:grid-cols-3 lg:py-28">
-        <GithubLinks
-          href="https://github.com/nrjdalal/shadcn-ui-snippets"
-          title="Shadcn UI Snippets"
-          type="VS Code Extension"
-        >
-          Simply import and use shadcn-ui components in your project
-        </GithubLinks>
-
-        <GithubLinks
-          href="https://github.com/nrjdalal/onset"
-          title="Onset"
-          type="Starter Template"
-        >
-          An open source Next.js bare starter with step-by-step instructions if
-          required. Built with Next.js 14, Drizzle (Postgres), NextAuth/Auth.js
-        </GithubLinks>
-
-        <GithubLinks
-          href="https://github.com/nrjdalal/JioTV-Next"
-          title="JioTV"
-          type="Next.js App"
-        >
-          JioTV HD Streaming Free on Browser / Android / Android TV
-        </GithubLinks>
-
-        <GithubLinks
-          href="https://github.com/nrjdalal/google-parser"
-          title="Google Parser"
-          type="npm package"
-        >
-          HTTP based Google Search Results scraper/parser
-        </GithubLinks>
-      </div>
     </main>
   )
 }
