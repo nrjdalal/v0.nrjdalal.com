@@ -1,3 +1,4 @@
+import { Github, Twitter } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -7,8 +8,17 @@ const Page = () => {
       {
         // ~ Header
       }
-      <div className="mx-5 flex h-12 items-center">
+      <div className="mx-5 flex h-12 items-center justify-between">
         <p className="text-md font-semibold">NEERAJ DALAL</p>
+
+        <div className="flex gap-5">
+          <Link href={'https://x.com/nrjdalal_com'} target="_blank">
+            <Twitter />
+          </Link>
+          <Link href={'https://github.com/nrjdalal'} target="_blank">
+            <Github />
+          </Link>
+        </div>
       </div>
 
       {
