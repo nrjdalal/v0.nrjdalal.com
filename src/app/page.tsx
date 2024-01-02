@@ -213,6 +213,37 @@ const BlogLinks = ({
   )
 }
 
+const GithubLinks = ({
+  href,
+  title,
+  type,
+  children,
+}: {
+  href: string
+  title: string
+  type: string
+  children: React.ReactNode
+}) => {
+  return (
+    <Link href={href} target="_blank">
+      <div className="h-full rounded-lg border border-slate-300 font-medium">
+        <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
+          <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
+          <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
+          <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
+        </div>
+        <div className="p-5">
+          <h2 className="text-xl md:text-2xl">{title}</h2>
+          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
+            {type}
+          </p>
+          <p className="pt-4 text-lg text-slate-500">{children}</p>
+        </div>
+      </div>
+    </Link>
+  )
+}
+
 const Projects = ({
   src,
   href,
@@ -256,37 +287,6 @@ const Projects = ({
   )
 }
 
-const GithubLinks = ({
-  href,
-  title,
-  type,
-  children,
-}: {
-  href: string
-  title: string
-  type: string
-  children: React.ReactNode
-}) => {
-  return (
-    <Link href={href} target="_blank">
-      <div className="h-full rounded-lg border border-slate-300 font-medium">
-        <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
-          <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
-          <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
-          <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
-        </div>
-        <div className="p-5">
-          <h2 className="text-xl md:text-2xl">{title}</h2>
-          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
-            {type}
-          </p>
-          <p className="pt-4 text-lg text-slate-500">{children}</p>
-        </div>
-      </div>
-    </Link>
-  )
-}
-
 const ContactLinks = ({
   href,
   title,
@@ -307,7 +307,7 @@ const ContactLinks = ({
           <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
         </div>
         <div className="p-5">
-          <h2 className="text-xl md:text-2xl">{title}</h2>
+          <h2 className="text-lg md:text-xl">{title}</h2>
           <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
             {type}
           </p>
