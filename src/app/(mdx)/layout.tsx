@@ -21,7 +21,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
       <div className="mx-2.5 border-t border-slate-800 px-2.5 pt-10 font-medium" />
 
       <div className="flex justify-center">
-        <article className="prose w-full max-w-screen-md px-5 pt-10">
+        <article className="prose w-full max-w-screen-md px-5 py-10">
           <div className="flex items-center gap-5">
             <Link
               className="text-xs font-semibold text-blue-500 no-underline"
