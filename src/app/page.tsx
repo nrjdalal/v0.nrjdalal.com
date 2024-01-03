@@ -48,11 +48,19 @@ const Page = () => {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <BlogLinks
+            href="/blog/web-development"
+            title="Web Development"
+            type="Resources"
+          >
+            How to get started in 2024, and some useful resources
+          </BlogLinks>
+
+          <BlogLinks
             href="/blog/recommendations"
             title="Recommendations"
             type="Series, Movies & More"
           >
-            I honestly believe you&apos;ll love some if not all of it ;)
+            I honestly believe you&apos;ll love some if not all of it
           </BlogLinks>
 
           <BlogLinks href="/blog/fitness" title="Fitness" type="Journal">
