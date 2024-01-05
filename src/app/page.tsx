@@ -208,7 +208,7 @@ const BlogLinks = ({
   return (
     <Link href={href}>
       <div className="h-full rounded-lg border border-slate-300 font-medium">
-        <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
+        <div className="flex h-7 w-full items-center gap-x-2 px-3">
           <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
@@ -239,7 +239,7 @@ const GithubLinks = ({
   return (
     <Link href={href} target="_blank">
       <div className="h-full rounded-lg border border-slate-300 font-medium">
-        <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
+        <div className="flex h-7 w-full items-center gap-x-2 px-3">
           <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
@@ -271,7 +271,7 @@ const Projects = ({
     <div className="mx-5 flex flex-col border-t border-slate-300 lg:py-10">
       <div className="grid gap-x-16 gap-y-12 py-20 lg:grid-cols-2">
         <div className="overflow-hidden rounded-lg border border-slate-300">
-          <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
+          <div className="flex h-7 w-full items-center gap-x-2 px-3">
             <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
             <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
             <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
@@ -313,7 +313,7 @@ const ContactLinks = ({
   return (
     <Link href={href}>
       <div className="h-full rounded-lg border border-slate-300 font-medium">
-        <div className="bg-slate flex h-7 w-full items-center gap-x-2 px-3">
+        <div className="flex h-7 w-full items-center gap-x-2 px-3">
           <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-green-400" />

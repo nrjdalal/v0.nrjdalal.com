@@ -1,3 +1,5 @@
+import { BrowserPreview } from '@/components/browserPreview'
+
 export const metadata = {
   title: 'Web Development',
   description: 'How to get started in 2024, and some useful resources',
@@ -18,19 +20,27 @@ export const metadata = {
 
 ### Getting started
 
-1. First you need to create new file called `index.html` and open it in VS Code, and paste the following code
+1. #### First you need to create new file called `index.html` and open it in VS Code, and paste the following code
 
 ```html
 <!doctype html>
 <html>
+  <head>
+    <title>My First Webpage</title>
+  </head>
   <body>
     <h1>Hello world!</h1>
   </body>
 </html>
 ```
 
-> All HTML documents must start with a \<!DOCTYPE> declaration. Then the HTML document itself begins with \<html> and ends with \</html>. The visible part of the HTML document is between \<body> and \</body>.
+- All HTML documents must start with a `<!DOCTYPE>` declaration.
+- The `<html>` tag represents the root of an HTML document and is the container for all other HTML elements (except for the `<!DOCTYPE>` tag).
+- The `<head>` element is a container for metadata (data about data). Typically defines the document title, character set, styles, scripts, and other meta information.
+- The `<body>` element contains all the contents of an HTML document, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.
 
-2. To view the webpage, run `bunx vite` in the terminal, and open the link in your browser. The following should be displayed:
+2. #### To view the webpage, run `bunx vite` in the terminal, and open the link in your browser. The following should be displayed:
 
-# Hello world!
+<BrowserPreview title="My First Webpage" url="http://localhost:5173">
+  <h1>Hello world!</h1>
+</BrowserPreview>
