@@ -13,12 +13,50 @@ export const metadata = {
 
 > Starting in 2024? It has never been easier! The web is a great place to be, and it's only getting better.
 
-### Prerequisites
+## Prerequisites
 
 - VS Code (Awesome code editor)
 - Bun (An all-in-one JavaScript runtime) or Node.js
 
-### Getting started with HTML
+## Getting started with HTML
+
+### What is HTML?
+
+---
+
+HTML is the standard markup language for creating Web pages.
+
+- HTML stands for Hyper Text Markup Language
+- HTML is the standard markup language for creating Web pages
+- HTML describes the structure of a Web page
+- HTML consists of a series of elements
+- HTML elements tell the browser how to display the content
+- HTML elements label pieces of content such as "this is a heading", "this is a paragraph", "this is a link", etc.
+
+#### A simple HTML document
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>My First Webpage</title>
+  </head>
+  <body>
+    <h1>This is my first webpage!</h1>
+  </body>
+</html>
+```
+
+- The `<!DOCTYPE html>` declaration defines that this document is an HTML5 document
+- The `<html>` element is the root element of an HTML page
+- The `<head>` element contains meta information about the HTML page
+- The `<title>` element specifies a title for the HTML page (which is shown in the browser's title bar or in the page's tab)
+- The `<body>` element defines the document's body, and is a container for all the visible contents, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.
+- The `<h1>` element defines a large heading
+
+### How to run a HTML file locally? (Best way)
+
+---
 
 1. #### Open VS Code and create a new file called `index.html` in a new folder called `learning-html`.
 
@@ -29,12 +67,12 @@ export const metadata = {
     <title>My First Webpage</title>
   </head>
   <body>
-    <h1>Hello world!</h1>
+    <h1>This is my first webpage!</h1>
   </body>
 </html>
 ```
 
-2. #### In terminal, navigate to the `learning-html` folder and run `bunx vite` to run a local server. The following should be displayed:
+2. #### In terminal, navigate to the `learning-html` folder and run `bunx vite` to run a local server. The following should be displayed -
 
 ```
 VITE v5.0.0  ready in 50 ms
@@ -44,15 +82,8 @@ VITE v5.0.0  ready in 50 ms
 ➜  press h + enter to show help
 ```
 
-3. #### Open the link in your browser. The following should be displayed:
+3. #### Open the link in your browser. The following should be displayed -
 
 <BrowserPreview title="My First Webpage" url="localhost:5173">
-  <h1>Hello world!</h1>
+  <h1>This is my first webpage!</h1>
 </BrowserPreview>
-
-- All HTML documents must start with a `<!DOCTYPE>` declaration.
-- The `<html>` tag represents the root of an HTML document and is the container for all other HTML elements (except for the `<!DOCTYPE>` tag).
-- The `<head>` element is a container for metadata (data about data). Typically defines the document title, character set, styles, scripts, and other meta information.
-- The `<body>` element contains all the contents of an HTML document, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.
-
-2. #### To view the webpage, run `bunx vite` in the terminal, and open the link in your browser. The following should be displayed:
