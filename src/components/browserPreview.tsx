@@ -10,7 +10,7 @@ export const BrowserPreview = ({
   url: string
 }) => {
   return (
-    <div className="w-full rounded-lg border border-slate-300">
+    <div className="w-full rounded-lg">
       <div className="flex h-8 cursor-not-allowed items-center gap-x-2 rounded-t-lg bg-zinc-700 px-3">
         <div className="h-3 w-3 rounded-full bg-red-400" />
         <div className="h-3 w-3 rounded-full bg-yellow-400" />
@@ -19,7 +19,7 @@ export const BrowserPreview = ({
           {title} <X className="ml-1.5 h-3.5 w-3.5" />
         </div>
       </div>
-      <div className="flex h-10 cursor-not-allowed items-center gap-3 border-b bg-zinc-600 px-3 text-white">
+      <div className="flex h-10 cursor-not-allowed items-center gap-3 bg-zinc-600 px-3 text-white">
         <ArrowLeft className="h-3.5 w-3.5" />
         <ArrowRight className="h-3.5 w-3.5" />
         <RotateCw className="h-3.5 w-3.5" />
@@ -27,7 +27,9 @@ export const BrowserPreview = ({
           {url}
         </div>
       </div>
-      <div className="min-h-[25dvh]">{children}</div>
+      <div className="min-h-[25dvh] rounded-b-lg border border-zinc-600">
+        {children}
+      </div>
     </div>
   )
 }
