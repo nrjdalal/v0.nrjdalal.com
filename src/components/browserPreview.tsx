@@ -27,7 +27,7 @@ export const BrowserPreview = ({
           {url}
         </div>
       </div>
-      <div className="min-h-[50dvh]">{children}</div>
+      <div className="min-h-[25dvh]">{children}</div>
     </div>
   )
 }
