@@ -31,6 +31,7 @@ const Page = () => {
         <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl">
           Blogs
         </h2>
+        {/* Exploring entertainment, food and much more */}
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <BlogLinks
@@ -41,16 +42,24 @@ const Page = () => {
             How to get started in 2024, and some useful resources
           </BlogLinks>
 
+          <BlogLinks href="/blog/fitness" title="Fitness" type="Journal">
+            My fitness journey, what I&apos;ve learned and what I&apos;ve done
+          </BlogLinks>
+
+          <BlogLinks
+            href="/blog/travel"
+            title="Travel"
+            type="Entertainment, Food & More"
+          >
+            Exploring entertainment, food and much more
+          </BlogLinks>
+
           <BlogLinks
             href="/blog/recommendations"
             title="Recommendations"
             type="Series, Movies & More"
           >
             I honestly believe you&apos;ll love some if not all of it
-          </BlogLinks>
-
-          <BlogLinks href="/blog/fitness" title="Fitness" type="Journal">
-            My fitness journey, what I&apos;ve learned and what I&apos;ve done
           </BlogLinks>
 
           <BlogLinks href="/blog/bookmarks" title="Bookmarks" type="Resources">
