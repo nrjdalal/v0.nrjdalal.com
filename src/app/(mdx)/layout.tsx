@@ -1,6 +1,7 @@
 'use client'
 
-import { Github, Pencil, Twitter } from 'lucide-react'
+import { Navbar } from '@/app/page'
+import { Pencil } from 'lucide-react'
 import Link from 'next/link'
 import { useSelectedLayoutSegments } from 'next/navigation'
 
@@ -15,21 +16,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <main className="container mx-auto min-h-[100dvh] max-w-screen-xl">
-      {
-        // ~ Header
-      }
-      <div className="mx-5 flex h-12 items-center justify-between gap-5">
-        <p className="text-md font-semibold">NEERAJ DALAL</p>
-
-        <div className="flex gap-5">
-          <Link href={'https://x.com/nrjdalal_com'} target="_blank">
-            <Twitter />
-          </Link>
-          <Link href={'https://github.com/nrjdalal'} target="_blank">
-            <Github />
-          </Link>
-        </div>
-      </div>
+      <Navbar />
 
       {
         // ~ About
