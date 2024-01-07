@@ -1,6 +1,6 @@
 'use client'
 
-import { Navbar } from '@/app/page'
+import { Navbar } from '@/components/navbar'
 import { Pencil } from 'lucide-react'
 import Link from 'next/link'
 import { useSelectedLayoutSegments } from 'next/navigation'
