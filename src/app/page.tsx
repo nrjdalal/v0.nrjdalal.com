@@ -65,6 +65,10 @@ const Page = () => {
           <BlogLinks href="/blog/bookmarks" title="Bookmarks" type="Resources">
             Catch up on what I&apos;m reading, watching, and listening to
           </BlogLinks>
+
+          <BlogLinks href="/blog/cookbook" title="Cookbook" type="Recipes">
+            Let&apos;s make some food and drinks!
+          </BlogLinks>
         </div>
       </div>
 
