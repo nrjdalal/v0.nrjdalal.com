@@ -24,7 +24,7 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
       <div className="mx-2.5 border-t border-slate-800 px-2.5 pt-10 font-medium" />
 
       <div className="flex justify-center">
-        <article className="prose w-full max-w-screen-md px-5 pb-20 pt-10 prose-a:font-normal prose-a:no-underline">
+        <article className="prose w-full max-w-screen-md px-5 pb-20 pt-10 prose-a:font-normal prose-a:no-underline prose-blockquote:text-blue-600">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-5">
               <Link

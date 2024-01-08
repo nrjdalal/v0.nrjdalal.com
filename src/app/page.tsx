@@ -16,7 +16,7 @@ const Page = () => {
         </p>
 
         <p className="pt-10 text-2xl md:text-3xl">
-          I&apos;m Neeraj Dalal, a web developer based in New Delhi, India.
+          I&apos;m Neeraj Dalal, a web developer from in New Delhi, India.
         </p>
 
         <p className="pt-2 text-2xl md:text-3xl">
