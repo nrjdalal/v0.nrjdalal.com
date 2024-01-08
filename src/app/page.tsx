@@ -179,11 +179,11 @@ const Page = () => {
           </ContactLinks>
 
           <ContactLinks
-            href="https://github.com/nrjdalal"
-            title="Raise an issue ..."
-            type="Github"
+            href="/nrjdalal.pdf"
+            title="About me in doc ..."
+            type="Resume"
           >
-            @nrjdalal
+            Download resume
           </ContactLinks>
         </div>
       </div>
