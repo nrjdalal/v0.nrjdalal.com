@@ -1,4 +1,4 @@
-import { Github, Instagram, Twitter } from 'lucide-react'
+import { Github, Instagram, Linkedin, Twitter } from 'lucide-react'
 import Link from 'next/link'
 
 export const Navbar = () => {
@@ -7,6 +7,9 @@ export const Navbar = () => {
       <p className="text-md font-semibold">NEERAJ DALAL</p>
 
       <div className="flex gap-5">
+        <Link href={'https://linkedin.com/in/nrjdalal'} target="_blank">
+          <Linkedin className="text-blue-500" />
+        </Link>
         <Link href={'https://github.com/nrjdalal'} target="_blank">
           <Github />
         </Link>
