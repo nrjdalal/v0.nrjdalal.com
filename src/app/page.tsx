@@ -35,6 +35,14 @@ const Page = () => {
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           <BlogLinks
+            href="/blog/javascript"
+            title="JavaScript in 2024"
+            type="Resources"
+          >
+            How to code with JavaScript in 2024
+          </BlogLinks>
+
+          <BlogLinks
             href="/blog/web-development"
             title="Web Development"
             type="Resources"
