@@ -1,8 +1,61 @@
 import { Navbar } from '@/components/navbar'
 import Image from 'next/image'
 import Link from 'next/link'
+import pMap from 'p-map'
 
-const Page = () => {
+const Page = async () => {
+  const githubBlogs = {
+    username: 'nrjdalal',
+    repository: 'nrjdalal.com',
+    path: 'src/app/(mdx)/blog',
+  }
+
+  const contentApi = ({
+    username,
+    repository,
+    path,
+  }: {
+    username: string
+    repository: string
+    path: string
+  }) =>
+    `https://api.github.com/repos/${username}/${repository}/contents/${path}`
+
+  const rawText = ({
+    username,
+    repository,
+    path,
+    slug,
+  }: {
+    username: string
+    repository: string
+    path: string
+    slug: string
+  }) =>
+    `https://raw.githubusercontent.com/${username}/${repository}/main/${path}/${slug}/page.mdx`
+
+  const blogs = await fetch(contentApi(githubBlogs)).then(async (res) => {
+    const slugs = (await res.json()).map((blog: any) => blog.name)
+
+    const blogs = await pMap(slugs, async (slug: string) => {
+      const res = await fetch(rawText({ ...githubBlogs, slug }))
+      const text = (await res.text())
+        .replaceAll('\n', ' ')
+        .split(', }  #')[0]
+        .split('metadata = {   ')[1]
+        .split(',   ')
+
+      const title = text[0].split('title: ')[1].slice(1, -1)
+      const description = text[1].split('description: ')[1].slice(1, -1)
+
+      return { slug, title, description }
+    })
+
+    return blogs
+  })
+
+  console.log(blogs)
+
   return (
     <main className="container mx-auto max-w-screen-xl text-slate-800">
       <Navbar />
@@ -31,52 +84,18 @@ const Page = () => {
         <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl">
           Blogs
         </h2>
-        {/* Exploring entertainment, food and much more */}
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <BlogLinks
-            href="/blog/javascript"
-            title="JavaScript in 2024"
-            type="Resources"
-          >
-            How to code with JavaScript in 2024
-          </BlogLinks>
-
-          <BlogLinks
-            href="/blog/web-development"
-            title="Web Development"
-            type="Resources"
-          >
-            How to get started in 2024, and some useful resources
-          </BlogLinks>
-
-          <BlogLinks href="/blog/fitness" title="Fitness" type="Journal">
-            My fitness journey, what I&apos;ve learned and what I&apos;ve done
-          </BlogLinks>
-
-          <BlogLinks
-            href="/blog/travel"
-            title="Travel"
-            type="Entertainment, Food & More"
-          >
-            Exploring entertainment, food and much more
-          </BlogLinks>
-
-          <BlogLinks
-            href="/blog/recommendations"
-            title="Recommendations"
-            type="Series, Movies & More"
-          >
-            I honestly believe you&apos;ll love some if not all of it
-          </BlogLinks>
-
-          <BlogLinks href="/blog/bookmarks" title="Bookmarks" type="Resources">
-            Catch up on what I&apos;m reading, watching, and listening to
-          </BlogLinks>
-
-          <BlogLinks href="/blog/cookbook" title="Cookbook" type="Recipes">
-            Let&apos;s make some food and drinks!
-          </BlogLinks>
+          {blogs.map((blog: any) => (
+            <BlogLinks
+              key={blog.slug}
+              href={`/blog/${blog.slug}`}
+              title={blog.title}
+              type="Resources"
+            >
+              {blog.description}
+            </BlogLinks>
+          ))}
         </div>
       </div>
 
@@ -208,7 +227,7 @@ const BlogLinks = ({
   children,
 }: {
   href: string
-  title: string
+  title: any
   type: string
   children: React.ReactNode
 }) => {
