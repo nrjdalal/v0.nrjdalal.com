@@ -43,6 +43,7 @@ const Page = async () => {
           revalidate: 3600, // 1 hour
         },
       })
+
       const text = (await res.text())
         .replaceAll('\n', ' ')
         .split(', }  #')[0]
@@ -243,9 +244,9 @@ const BlogLinks = ({
         </div>
         <div className="p-5">
           <h2 className="text-xl md:text-2xl">{title}</h2>
-          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
+          {/* <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
             {type}
-          </p>
+          </p> */}
           <p className="pt-4 text-lg text-slate-500">{children}</p>
         </div>
       </div>
