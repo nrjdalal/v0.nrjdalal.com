@@ -38,7 +38,11 @@ const Page = async () => {
     const slugs = (await res.json()).map((blog: any) => blog.name)
 
     const blogs = await pMap(slugs, async (slug: string) => {
-      const res = await fetch(rawText({ ...githubBlogs, slug }))
+      const res = await fetch(rawText({ ...githubBlogs, slug }), {
+        next: {
+          revalidate: 3600, // 1 hour
+        },
+      })
       const text = (await res.text())
         .replaceAll('\n', ' ')
         .split(', }  #')[0]
@@ -53,8 +57,6 @@ const Page = async () => {
 
     return blogs
   })
-
-  console.log(blogs)
 
   return (
     <main className="container mx-auto max-w-screen-xl text-slate-800">
