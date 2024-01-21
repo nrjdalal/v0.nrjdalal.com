@@ -1,16 +1,20 @@
 import { Navbar } from '@/components/navbar'
+import Dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import Image from 'next/image'
 import Link from 'next/link'
 import pMap from 'p-map'
 
 const Page = async () => {
+  Dayjs.extend(relativeTime)
+
   const githubBlogs = {
     username: 'nrjdalal',
     repository: 'nrjdalal.com',
     path: 'src/app/(mdx)/blog',
   }
 
-  const contentApi = ({
+  const blogJson = async ({
     username,
     repository,
     path,
@@ -18,8 +22,26 @@ const Page = async () => {
     username: string
     repository: string
     path: string
-  }) =>
-    `https://api.github.com/repos/${username}/${repository}/contents/${path}`
+  }) => {
+    const res = await (
+      await fetch(
+        `https://github.com/${username}/${repository}/tree-commit-info/main/${path}`,
+        {
+          headers: {
+            accept: 'application/json',
+          },
+          next: {
+            revalidate: 3600,
+          },
+        },
+      )
+    ).json()
+
+    return Object.values(res).map((item: any, index: number) => ({
+      slug: Object.keys(res)[index],
+      ...item,
+    }))
+  }
 
   const rawText = ({
     username,
@@ -34,29 +56,39 @@ const Page = async () => {
   }) =>
     `https://raw.githubusercontent.com/${username}/${repository}/main/${path}/${slug}/page.mdx`
 
-  const blogs = await fetch(contentApi(githubBlogs)).then(async (res) => {
-    const slugs = (await res.json()).map((blog: any) => blog.name)
+  const blogsData = await blogJson(githubBlogs)
+  const blogsSlugs = blogsData.map((blog: any) => blog.slug)
 
-    const blogs = await pMap(slugs, async (slug: string) => {
-      const res = await fetch(rawText({ ...githubBlogs, slug }), {
-        next: {
-          revalidate: 3600, // 1 hour
-        },
-      })
-
-      const text = (await res.text())
-        .replaceAll('\n', ' ')
-        .split(', }  #')[0]
-        .split('metadata = {   ')[1]
-        .split(',   ')
-
-      const title = text[0].split('title: ')[1].slice(1, -1)
-      const description = text[1].split('description: ')[1].slice(1, -1)
-
-      return { slug, title, description }
+  const blogsMeta = await pMap(blogsSlugs, async (slug: string) => {
+    const res = await fetch(rawText({ ...githubBlogs, slug }), {
+      next: {
+        revalidate: 3600,
+      },
     })
 
-    return blogs
+    const text = (await res.text())
+      .replaceAll('\n', ' ')
+      .split(', }  #')[0]
+      .split('metadata = {   ')[1]
+      .split(',   ')
+
+    const title = text[0].split('title: ')[1].slice(1, -1)
+    const description = text[1].split('description: ')[1].slice(1, -1)
+
+    return {
+      slug,
+      title,
+      description,
+    } as any
+  })
+
+  //  JOIN BLOGS DATA WITH BLOGS META
+  const blogs = blogsData.map((blog: any) => {
+    const { title, description } = blogsMeta.find(
+      (item: any) => item.slug === blog.slug,
+    )
+
+    return { ...blog, title, description }
   })
 
   return (
@@ -89,16 +121,20 @@ const Page = async () => {
         </h2>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {blogs.map((blog: any) => (
-            <BlogLinks
-              key={blog.slug}
-              href={`/blog/${blog.slug}`}
-              title={blog.title}
-              type="Resources"
-            >
-              {blog.description}
-            </BlogLinks>
-          ))}
+          {blogs
+            .sort((a: any, b: any) => {
+              return new Date(b.date).getTime() - new Date(a.date).getTime()
+            })
+            .map((blog: any) => (
+              <BlogLinks
+                key={blog.slug}
+                href={`/blog/${blog.slug}`}
+                title={blog.title}
+                time={blog.date}
+              >
+                {blog.description}
+              </BlogLinks>
+            ))}
         </div>
       </div>
 
@@ -226,12 +262,12 @@ export default Page
 const BlogLinks = ({
   href,
   title,
-  type,
+  time,
   children,
 }: {
   href: string
   title: any
-  type: string
+  time: string
   children: React.ReactNode
 }) => {
   return (
@@ -244,9 +280,9 @@ const BlogLinks = ({
         </div>
         <div className="p-5">
           <h2 className="text-xl md:text-2xl">{title}</h2>
-          {/* <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
-            {type}
-          </p> */}
+          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
+            Last updated: {Dayjs(time).fromNow()}
+          </p>
           <p className="pt-4 text-lg text-slate-500">{children}</p>
         </div>
       </div>
