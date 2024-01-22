@@ -28,6 +28,9 @@ const getBlogs = async () => {
           headers: {
             accept: 'application/json',
           },
+          next: {
+            revalidate: 300,
+          },
         },
       )
     ).json()
@@ -55,7 +58,11 @@ const getBlogs = async () => {
   const blogsSlugs = blogsData.map((blog: any) => blog.slug)
 
   const blogsMeta = await pMap(blogsSlugs, async (slug: string) => {
-    const res = await fetch(rawText({ ...githubBlogs, slug }))
+    const res = await fetch(rawText({ ...githubBlogs, slug }), {
+      next: {
+        revalidate: 300,
+      },
+    })
 
     const text = (await res.text())
       .replaceAll('\n', ' ')
