@@ -70,25 +70,25 @@ const getBlogs = async () => {
       .split('metadata = {   ')[1]
       .split(',   ')
 
-    console.log(text)
-
     const title = text[0].split('title: ')[1].slice(1, -1)
     const description = text[1].split('description: ')[1].slice(1, -1)
+    const tags = text[2]?.split('tags: ')[1].slice(1, -1) || 'Untagged'
 
     return {
       slug,
       title,
       description,
+      tags,
     } as any
   })
 
   return blogsData
     .map((blog: any) => {
-      const { title, description } = blogsMeta.find(
+      const { title, description, tags } = blogsMeta.find(
         (item: any) => item.slug === blog.slug,
       )
 
-      return { ...blog, title, description }
+      return { ...blog, title, description, tags }
     })
     .sort((a: any, b: any) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -135,10 +135,10 @@ const Page = async () => {
               key={blog.slug}
               href={`/blog/${blog.slug}`}
               title={blog.title}
+              tags={blog.tags}
+              description={blog.description}
               time={blog.date}
-            >
-              {blog.description}
-            </BlogLinks>
+            />
           ))}
         </div>
       </div>
@@ -267,13 +267,15 @@ export default Page
 const BlogLinks = ({
   href,
   title,
+  tags,
+  description,
   time,
-  children,
 }: {
   href: string
-  title: any
+  title: string
   time: string
-  children: React.ReactNode
+  description: string
+  tags: string
 }) => {
   return (
     <Link href={href}>
@@ -283,12 +285,15 @@ const BlogLinks = ({
           <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
         </div>
-        <div className="p-5">
+        <div className="relative h-full p-5 pb-10">
           <h2 className="text-xl md:text-2xl">{title}</h2>
           <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
-            Last updated {Dayjs(time).fromNow()}
+            {tags}
           </p>
-          <p className="pt-4 text-lg text-slate-500">{children}</p>
+          <p className="pt-4 text-lg text-slate-500">{description}</p>
+          <p className="absolute bottom-10 right-5 mt-auto w-full text-right text-[0.6rem] capitalize text-slate-700">
+            {Dayjs(time).fromNow()}
+          </p>
         </div>
       </div>
     </Link>
