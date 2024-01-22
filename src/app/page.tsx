@@ -5,9 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import pMap from 'p-map'
 
-const Page = async () => {
-  Dayjs.extend(relativeTime)
-
+const getBlogs = async () => {
   const githubBlogs = {
     username: 'nrjdalal',
     repository: 'nrjdalal.com',
@@ -31,7 +29,7 @@ const Page = async () => {
             accept: 'application/json',
           },
           next: {
-            revalidate: 3600,
+            revalidate: 300,
           },
         },
       )
@@ -62,7 +60,7 @@ const Page = async () => {
   const blogsMeta = await pMap(blogsSlugs, async (slug: string) => {
     const res = await fetch(rawText({ ...githubBlogs, slug }), {
       next: {
-        revalidate: 3600,
+        revalidate: 300,
       },
     })
 
@@ -82,14 +80,23 @@ const Page = async () => {
     } as any
   })
 
-  //  JOIN BLOGS DATA WITH BLOGS META
-  const blogs = blogsData.map((blog: any) => {
-    const { title, description } = blogsMeta.find(
-      (item: any) => item.slug === blog.slug,
-    )
+  return blogsData
+    .map((blog: any) => {
+      const { title, description } = blogsMeta.find(
+        (item: any) => item.slug === blog.slug,
+      )
 
-    return { ...blog, title, description }
-  })
+      return { ...blog, title, description }
+    })
+    .sort((a: any, b: any) => {
+      return new Date(b.date).getTime() - new Date(a.date).getTime()
+    })
+}
+
+const Page = async () => {
+  Dayjs.extend(relativeTime)
+
+  const blogs = await getBlogs()
 
   return (
     <main className="container mx-auto max-w-screen-xl text-slate-800">
@@ -121,20 +128,16 @@ const Page = async () => {
         </h2>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {blogs
-            .sort((a: any, b: any) => {
-              return new Date(b.date).getTime() - new Date(a.date).getTime()
-            })
-            .map((blog: any) => (
-              <BlogLinks
-                key={blog.slug}
-                href={`/blog/${blog.slug}`}
-                title={blog.title}
-                time={blog.date}
-              >
-                {blog.description}
-              </BlogLinks>
-            ))}
+          {blogs.map((blog: any) => (
+            <BlogLinks
+              key={blog.slug}
+              href={`/blog/${blog.slug}`}
+              title={blog.title}
+              time={blog.date}
+            >
+              {blog.description}
+            </BlogLinks>
+          ))}
         </div>
       </div>
 
@@ -281,7 +284,7 @@ const BlogLinks = ({
         <div className="p-5">
           <h2 className="text-xl md:text-2xl">{title}</h2>
           <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
-            Last updated: {Dayjs(time).fromNow()}
+            Last updated {Dayjs(time).fromNow()}
           </p>
           <p className="pt-4 text-lg text-slate-500">{children}</p>
         </div>
