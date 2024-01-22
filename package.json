@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "git pull && next dev",
+    "dev": "git pull origin main && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
