@@ -1,6 +1,5 @@
 import { Navbar } from '@/components/navbar'
-import Dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
+import TimeAgo from '@/components/timeAgo'
 import Image from 'next/image'
 import Link from 'next/link'
 import pMap from 'p-map'
@@ -89,8 +88,6 @@ const getBlogs = async () => {
 }
 
 const Page = async () => {
-  Dayjs.extend(relativeTime)
-
   const blogs = await getBlogs()
 
   return (
@@ -284,9 +281,9 @@ const BlogLinks = ({
             {tags}
           </p>
           <p className="pt-4 text-lg text-slate-500">{description}</p>
-          <p className="absolute bottom-10 right-5 mt-auto w-full text-right text-[0.6rem] capitalize text-slate-700">
-            {Dayjs(time).fromNow()}
-          </p>
+          <div className="absolute bottom-10 right-5 mt-auto w-full text-right text-[0.6rem] capitalize text-slate-700">
+            <TimeAgo time={time} />
+          </div>
         </div>
       </div>
     </Link>
