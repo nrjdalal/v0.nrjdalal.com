@@ -4,7 +4,9 @@ import Link from 'next/link'
 export const Navbar = () => {
   return (
     <div className="mx-5 flex h-12 items-center justify-between">
-      <p className="text-md font-semibold">NEERAJ DALAL</p>
+      <Link href={'/'} className="text-md font-semibold">
+        NEERAJ DALAL
+      </Link>
 
       <div className="flex gap-5">
         <Link href={'https://linkedin.com/in/nrjdalal'} target="_blank">
