@@ -1,3 +1,4 @@
+import { MdxLink } from '@/components/blogElements'
 import { ArrowUpRight } from 'lucide-react'
 
 export const metadata = {
@@ -12,16 +13,19 @@ export const metadata = {
 
 ---
 
-[<p className="flex gap-1 text-xl font-semibold">Next.js (Full-stack React Framework)<ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://nextjs.org/)
+<MdxLink href="https://nextjs.org/" className="text-xl font-semibold">
+  Next.js (Full-stack React Framework)
+</MdxLink>
 
 > The first thing I'd recommend is to get aquianted with **Next.js**
 
 - Why Next.js? Because it's The React Framework for the Web.
 - Used by some of the world's largest companies, Next.js enables you to create full-stack Web applications by extending the latest React features, and integrating powerful Rust-based JavaScript tooling for the fastest builds.
-- And even React documentation recommends it first before anything else. Don't believe me? See for yourself:
-  [<p className="flex gap-1"> <span className='font-medium'>Starting with React</span><ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://react.dev/learn/start-a-new-react-project)
+- And even React documentation recommends it first before anything else. Don't believe me? See for yourself: <MdxLink href="https://react.dev/learn/start-a-new-react-project" className="font-medium">Starting with React</MdxLink>
 
-[<p className="flex gap-1 text-xl font-semibold">Bun (An all-in-one JavaScript runtime)<ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://bun.sh/)
+<MdxLink href="https://bun.sh/" className="text-xl font-semibold">
+  Bun (An all-in-one JavaScript runtime)
+</MdxLink>
 
 > Make a switch from Node.js to **Bun**, or **pnpm**
 
@@ -77,5 +81,9 @@ I'd recommend using **Vercel**. Vercel’s Frontend Cloud provides the developer
 
 ### Some great resources
 
-- [<p className="flex gap-1">Onset Next.js Starter<ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://github.com/nrjdalal/onset)
-- [<p className="flex gap-1">Redirect.Link - An Open Source Example App<ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://github.com/nrjdalal/rdt.li)
+- <MdxLink href="https://github.com/nrjdalal/onset">
+    Onset Next.js Starter
+  </MdxLink>
+- <MdxLink href="https://github.com/nrjdalal/rdt.li">
+    Redirect.Link - An Open Source Example App
+  </MdxLink>

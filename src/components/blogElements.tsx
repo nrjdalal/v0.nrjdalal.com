@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import {
   ArrowLeft,
   ArrowRight,
@@ -55,13 +56,19 @@ export const BrowserPreview = ({
 
 export const MdxLink = ({
   href,
+  className,
   children,
 }: {
   href: string
-  children: string
+  className: string
+  children: string | React.ReactNode
 }) => {
   return (
-    <Link href={href} target="_blank" className="not-prose flex gap-1">
+    <Link
+      className={cn('not-prose flex gap-1', className)}
+      href={href}
+      target="_blank"
+    >
       {children}
       <ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" />
     </Link>
