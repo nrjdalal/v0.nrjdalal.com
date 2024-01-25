@@ -1,6 +1,8 @@
+import { cn } from '@/lib/utils'
 import {
   ArrowLeft,
   ArrowRight,
+  ArrowUpRight,
   Globe2,
   Home,
   Menu,
@@ -10,6 +12,7 @@ import {
   Star,
   X,
 } from 'lucide-react'
+import Link from 'next/link'
 
 export const BrowserPreview = ({
   title,
@@ -48,5 +51,26 @@ export const BrowserPreview = ({
         {children}
       </div>
     </div>
+  )
+}
+
+export const MdxLink = ({
+  href,
+  className,
+  children,
+}: {
+  href: string
+  className: string
+  children: string | React.ReactNode
+}) => {
+  return (
+    <Link
+      className={cn('not-prose flex gap-1', className)}
+      href={href}
+      target="_blank"
+    >
+      {children}
+      <ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" />
+    </Link>
   )
 }
