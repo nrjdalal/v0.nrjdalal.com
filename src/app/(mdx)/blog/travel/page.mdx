@@ -1,4 +1,4 @@
-import { ArrowUpRight } from 'lucide-react'
+import { MdxLink } from '@/components/blogElements'
 
 export const metadata = {
   title: 'Activities, Places & Food',
@@ -16,13 +16,30 @@ export const metadata = {
 
 > Delhi
 
-- [<p className="flex gap-1">Pop Seoul Cafe - Greater Kailash (4.5)<ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://maps.app.goo.gl/NfRtbhRW7NWP9XQj6)
-- [<p className="flex gap-1">Busan Korean Restaurant - Majnu Ka Tilla (4.2)<ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://maps.app.goo.gl/b9b1MeKo9iZeuKRw5)
-- [<p className="flex gap-1">Sinsa Seoul Cafe - Satya Niketan (4.2)<ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://maps.app.goo.gl/BvxfDUPupSeHyyqEA)
+- <MdxLink href="https://maps.app.goo.gl/b9b1MeKo9iZeuKRw5">
+    Busan Korean Restaurant - Majnu Ka Tilla (4.2)
+  </MdxLink>
+- <MdxLink href="https://maps.app.goo.gl/BvxfDUPupSeHyyqEA">
+    Sinsa Seoul Cafe - Satya Niketan (4.2)
+  </MdxLink>
 
 > Gurugram
 
-- [<p className="flex gap-1">SkyJumper Trampoline Park - Sohna Road (4.8 / 38k+)<ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" /></p>](https://maps.app.goo.gl/vqHeAiwL8xDR3NMu6)
+- <MdxLink href="https://maps.app.goo.gl/vqHeAiwL8xDR3NMu6">
+    SkyJumper Trampoline Park - Sohna Road (4.8 / 38k+)
+  </MdxLink>
+
+### Would not recommend
+
+> Delhi
+
+- <MdxLink
+    href="https://maps.app.goo.gl/NfRtbhRW7NWP9XQj6"
+    className="line-through"
+  >
+    Pop Seoul Cafe - Greater Kailash (4.5)
+  </MdxLink>
+  Wouldn't recommend trying the food here.
 
 ### Want to visit
 
