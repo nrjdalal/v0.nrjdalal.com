@@ -190,7 +190,11 @@ const Page = async () => {
       {
         // ~ Projects
       }
-      <Projects src="/rdt.li.png" href="https://rdt.li" title="Redirect Link">
+      <Projects
+        src="/rdt.li.png"
+        href="https://rdt.li"
+        title="Redirect Link (SAAS Product)"
+      >
         <p>
           rdt.li self hostable, feature rich, minimalistic and open source URL
           shortener. Built with Next.js, Drizzle, NextAuth and Postgres.
@@ -200,7 +204,7 @@ const Page = async () => {
       <Projects
         src="/serpwe.com.png"
         href="https://serpwe.com"
-        title="Serpwe"
+        title="Serpwe (SAAS Product)"
         demo="https://www.youtube.com/@SerpWe/videos"
       >
         <p>
@@ -212,7 +216,8 @@ const Page = async () => {
       <Projects
         src="/hetrolinks.com.png"
         href="https://hetrolinks.com"
-        title="Hetrolinks"
+        title="Hetrolinks (SAAS Product)"
+        demo="https://www.youtube.com/@Hetrolinks/videos"
       >
         <p>
           Instantly Repair Broken Amazon Affiliate Links - a product of Warewe
