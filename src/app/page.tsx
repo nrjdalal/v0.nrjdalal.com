@@ -197,7 +197,12 @@ const Page = async () => {
         </p>
       </Projects>
 
-      <Projects src="/serpwe.com.png" href="https://serpwe.com" title="Serpwe">
+      <Projects
+        src="/serpwe.com.png"
+        href="https://serpwe.com"
+        title="Serpwe"
+        demo="https://www.youtube.com/@SerpWe/videos"
+      >
         <p>
           Generate keyword ideas, group similar keywords, and organize them into
           topical clusters - a product of Warewe
@@ -326,11 +331,13 @@ const Projects = ({
   href,
   title,
   children,
+  demo,
 }: {
   src: string
   href: string
   title: string
   children: React.ReactNode
+  demo?: string
 }) => {
   return (
     <div className="mx-5 flex flex-col border-t border-slate-300 lg:py-10">
@@ -351,13 +358,25 @@ const Projects = ({
 
           <div className="pt-8 text-xl text-slate-500">{children}</div>
 
-          <Link
-            href={href}
-            target="_blank"
-            className="mt-8 w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
-          >
-            Visit Website
-          </Link>
+          <div className="mt-8 flex flex-wrap gap-4">
+            <Link
+              href={href}
+              target="_blank"
+              className="w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
+            >
+              Visit Website
+            </Link>
+
+            {demo && (
+              <Link
+                href={demo}
+                target="_blank"
+                className="w-max rounded-xl border border-red-500 bg-red-500 px-4 py-2 text-white"
+              >
+                Video Demo
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>
