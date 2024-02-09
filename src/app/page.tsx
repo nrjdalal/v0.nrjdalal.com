@@ -213,6 +213,7 @@ const Page = async () => {
         src="/hetrolinks.com.png"
         href="https://hetrolinks.com"
         title="Hetrolinks"
+        demo="https://www.youtube.com/@Hetrolinks/videos"
       >
         <p>
           Instantly Repair Broken Amazon Affiliate Links - a product of Warewe
