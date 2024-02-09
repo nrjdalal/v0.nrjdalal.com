@@ -134,6 +134,43 @@ const Page = async () => {
       </div>
 
       {
+        // ~ Projects
+      }
+      <Projects
+        src="/rdt.li.png"
+        href="https://rdt.li"
+        title="Redirect Link (SAAS Product)"
+      >
+        <p>
+          rdt.li self hostable, feature rich, minimalistic and open source URL
+          shortener. Built with Next.js, Drizzle, NextAuth and Postgres.
+        </p>
+      </Projects>
+
+      <Projects
+        src="/serpwe.com.png"
+        href="https://serpwe.com"
+        title="Serpwe (SAAS Product)"
+        demo="https://www.youtube.com/@SerpWe/videos"
+      >
+        <p>
+          Generate keyword ideas, group similar keywords, and organize them into
+          topical clusters - a product of Warewe
+        </p>
+      </Projects>
+
+      <Projects
+        src="/hetrolinks.com.png"
+        href="https://hetrolinks.com"
+        title="Hetrolinks (SAAS Product)"
+        demo="https://www.youtube.com/@Hetrolinks/videos"
+      >
+        <p>
+          Instantly Repair Broken Amazon Affiliate Links - a product of Warewe
+        </p>
+      </Projects>
+
+      {
         // ~ Github
       }
       <div className="mx-5 border-t border-slate-300 py-20  lg:py-28">
@@ -186,43 +223,6 @@ const Page = async () => {
           </GithubLinks>
         </div>
       </div>
-
-      {
-        // ~ Projects
-      }
-      <Projects
-        src="/rdt.li.png"
-        href="https://rdt.li"
-        title="Redirect Link (SAAS Product)"
-      >
-        <p>
-          rdt.li self hostable, feature rich, minimalistic and open source URL
-          shortener. Built with Next.js, Drizzle, NextAuth and Postgres.
-        </p>
-      </Projects>
-
-      <Projects
-        src="/serpwe.com.png"
-        href="https://serpwe.com"
-        title="Serpwe (SAAS Product)"
-        demo="https://www.youtube.com/@SerpWe/videos"
-      >
-        <p>
-          Generate keyword ideas, group similar keywords, and organize them into
-          topical clusters - a product of Warewe
-        </p>
-      </Projects>
-
-      <Projects
-        src="/hetrolinks.com.png"
-        href="https://hetrolinks.com"
-        title="Hetrolinks (SAAS Product)"
-        demo="https://www.youtube.com/@Hetrolinks/videos"
-      >
-        <p>
-          Instantly Repair Broken Amazon Affiliate Links - a product of Warewe
-        </p>
-      </Projects>
 
       {
         // ~ Contact
