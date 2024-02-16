@@ -16,13 +16,14 @@
 
 - **10th CBSE in 2014 -** Kendriya Vidyalaya Andrews Ganj, New Delhi
 - **12th CBSE in 2016 -** Kendriya Vidyalaya Andrews Ganj, New Delhi
-- **B.Tech. ECE from 2016-20 -** Delhi Technical Campus (affilated GGSIPU), New Delhi
+- **B.Tech. ECE from 2016-20 -** Delhi Technical Campus (affiliated GGSIPU), New Delhi
 
 <p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Work Experience</p>
 
 - **Full-Stack Developer at VeroXyle · May 2020 - September 2022**
-  - Developed and maintained multiple projects.
-  - Worked with lots of clients all over the world.
+  - worked and interacted with lots of clients all over the world
+  - developed and maintained multiple frontends and backends for contract based projects
+  - wrote CI/CD pipelines for multiple projects, server management scripts, addtional APIs for other projects and much more
 - **Senior Developer at Warewe · September 2022 - September 2023**
   - **[hetrolinks.com](https://hetrolinks.com)** - SAAS product instantly repair broken amazon affiliate links over any affiliate blogs or websites
     - usage video: [youtube.com/@Hetrolinks/videos](https://www.youtube.com/@Hetrolinks/videos)
@@ -38,4 +39,32 @@
     - engineered ways to run Puppeteer on AWS Lambda to scrape google search results and npm libraries to structure the data to be used to cluster and generate keyword ideas
     - created highly performand APIs to cluster the keywords (including running Python as a Child Process to get the performance)
     - wrote whole frontend in Next.js and leveraging libraries like Tanstack Query, TailwindCSS, and much more
-  - wrote CI/CD pipelines for both the projects, addtional APIs for other projects, server management scripts and much more
+
+<p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Open Source Work</p>
+
+- **[rdt.li](https://rdt.li)** - SAAS product or a self hostable url shortener, alternative to bit.ly
+  - 195+ stars on Github
+  - Over 190 active users
+  - to know more about the project, visit [rdt.li](https://rdt.li) or [README.md](https://github.com/nrjdalal/rdt.li)
+- **[shadcn/ui snippets](https://github.com/nrjdalal/shadcn-ui-snippets)** - VS Code extension to add snippets for [shadcn/ui](https://ui.shadcn.com)
+  - 70+ stars on Github
+  - 600+ installs on VS Code
+  - to know more about the project, visit [VS Code Extension Store](https://marketplace.visualstudio.com/items?itemName=VeroXyle.shadcn-ui-snippets)
+- **[40+ public projects](https://github.com/nrjdalal)** - including worldwide used gists, npm libraries, VS Code extensions, server management scripts, and much more
+
+<p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Blogs</p>
+
+- **[Mastering JavaScript](https://nrjdalal.com/blog/javascript)** - What to learn? What to use? Listing best frameworks, libraries, and tools and much more
+- **[Learn Web Development](https://nrjdalal.com/blog/web-development)** - How to get started in 2024, and some useful resources
+- **[Other Blogs](https://nrjdalal.com)** - find out more amazing blogs on my [website](https://nrjdalal.com)
+
+<p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Skills</p>
+
+- **Languages -** TypeScript, JavaScript, CSS, HTML, Shell
+- **Frameworks -** React, Next.js, Express, Elysia, TailwindCSS, etc
+- **Databases -** MongoDB, PostgreSQL, MySQL, SQLite, Redis
+- **ORMs -** Drizzle, Prisma, Mongoose
+- **Cloud -** AWS, Linode, DigitalOcean, Vercel, Netlify, Heroku
+- **Tools -** Figma, VS Code, Git, Docker, Nginx, Apache, PM2, etc
+- **Others -** SEO, Web Scraping, Performance Optimization, Security, etc
+- Creating npm libraries, serverless APIs, microservices, and much more
