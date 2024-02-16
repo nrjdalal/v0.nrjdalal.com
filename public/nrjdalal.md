@@ -39,6 +39,12 @@
     - engineered ways to run Puppeteer on AWS Lambda to scrape google search results and npm libraries to structure the data to be used to cluster and generate keyword ideas
     - created highly performand APIs to cluster the keywords (including running Python as a Child Process to get the performance)
     - wrote whole frontend in Next.js and leveraging libraries like Tanstack Query, TailwindCSS, and much more
+- **Contract by ​Sultan Wehaibi​ GFT Inc · November 2023 - Jan 2024**
+  - conceptualized project that enables users to access gifts through a sophisticated system utilizing QR codes
+  - developed using Next.js as an full-stack framework, leveraging Drizzle, Tanstack, TailwindCSS, external APIs, etc
+  - created a highly performant and scalable backend using Next.js API routes
+  - used AWS S3 to store the images and AWS Lambda to resize the images and serve them
+  - rate limiting and caching the requests to improve the performance leveraging upstash/redis, and much more
 
 <p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Open Source Work</p>
 
@@ -67,4 +73,12 @@
 - **Cloud -** AWS, Linode, DigitalOcean, Vercel, Netlify, Heroku
 - **Tools -** Figma, VS Code, Git, Docker, Nginx, Apache, PM2, etc
 - **Others -** SEO, Web Scraping, Performance Optimization, Security, etc
-- Creating npm libraries, serverless APIs, microservices, and much more
+- **Creating npm libraries, serverless APIs, microservices, starter kits and much more**
+
+<p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Latest Achievement</p>
+
+- Amongst top 7 [submissions](https://twitter.com/waahbete/status/1744718447546970599) for [mydukaan.io](https://mydukaan.io/) pixel perfect [challenge](https://twitter.com/nrjdalal_com/status/1744905625208074623) over 1000+ submissions
+
+<p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Philosophy</p>
+
+<p style="font-weight: 500; line-height: 0; margin-top: 24px;">Nothing is permanent, yet code remains. So why not write clean, re-useable and future-proof code.</p>
