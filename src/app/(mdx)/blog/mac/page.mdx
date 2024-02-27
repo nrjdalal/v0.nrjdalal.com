@@ -12,13 +12,7 @@ export const metadata = {
 
 ### Initial
 
-- Bun
-
-```sh
-curl -fsSL https://bun.sh/install | bash
-```
-
-- Git
+- git
 
 ```sh
 git config --global user.name "Neeraj Dalal"
@@ -26,10 +20,59 @@ git config --global user.email "admin@nrjdalal.com"
 git config --global init.defaultBranch "main"
 ```
 
-- Homebrew
+- bun
+
+```sh
+curl -fsSL https://bun.sh/install | bash
+```
+
+- brew
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+- post brew
+
+```sh
+brew install mas nvm
+```
+
+- nvm
+
+```
+nvm install --lts
+corepack enable pnpm
+corepack enable yarn
+```
+
+### Apps
+
+```sh
+brew install --cask affinity-designer
+brew install --cask affinity-photo
+brew install --cask affinity-publisher
+brew install --cask google-chrome
+brew install --cask visual-studio-code
+```
+
+### CLI Installs
+
+- bun
+
+```sh
+bunx zshify
+```
+
+- brew
+
+```sh
+brew install gh
+brew install git
+brew install rsync
+brew install zsh-autosuggestions
+brew install zsh-history-substring-search
+brew install zsh-syntax-highlighting
 ```
 
 ### Apps (App Store)
@@ -56,41 +99,4 @@ mas install 1575588022
 
 ```sh
 mas install 1491071483
-```
-
-### Apps (Homebrew Casks)
-
-```sh
-brew install --cask affinity-designer
-brew install --cask affinity-photo
-brew install --cask affinity-publisher
-brew install --cask google-chrome
-brew install --cask visual-studio-code
-```
-
-### CLI Installs
-
-- Bun Installs
-
-```sh
-bunx zshify
-```
-
-- Homebrew Installs
-
-```sh
-brew install gh
-brew install git
-brew install nvm
-brew install rsync
-brew install zsh-autosuggestions
-brew install zsh-history-substring-search
-brew install zsh-syntax-highlighting
-```
-
-- Post `nvm install --lts`
-
-```sh
-corepack enable pnpm
-corepack enable yarn
 ```
