@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Mac Setup',
-  description: "Apps I use, CLI tools & more",
+  description: 'Apps I use, CLI tools & more',
   tags: 'Easy Access, Self Management',
 }
 
@@ -12,12 +12,25 @@ export const metadata = {
 
 ### Initial
 
-- git
-  ```sh
-  git config --global user.name "Neeraj Dalal"
-  git config --global user.email "admin@nrjdalal.com"
-  git config --global init.defaultBranch "main"
-  ```
+- Bun
+
+```sh
+curl -fsSL https://bun.sh/install | bash
+```
+
+- Git
+
+```sh
+git config --global user.name "Neeraj Dalal"
+git config --global user.email "admin@nrjdalal.com"
+git config --global init.defaultBranch "main"
+```
+
+- Homebrew
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
 
 ### Apps (App Store)
 
@@ -27,34 +40,37 @@ export const metadata = {
 
 ### Apps (Homebrew Casks)
 
-- Google Chrome
-  ```sh
-  brew install --cask google-chrome
-  ```
-- Rectangle
-  ```sh
-  brew install --cask rectangle
-  ```
-- Visual Studio Code
-  ```sh
-  brew install --cask visual-studio-code
-  ```
+```sh
+brew install --cask affinity-designer
+brew install --cask affinity-photo
+brew install --cask affinity-publisher
+brew install --cask google-chrome
+brew install --cask visual-studio-code
+```
 
 ### CLI Installs
 
-- Bun
-  ```sh
-  curl -fsSL https://bun.sh/install | bash
-  ```
-- Homebrew
-  ```sh
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  ```
+- Bun Installs
+
+```sh
+bunx zshify
+```
+
 - Homebrew Installs
-  ```sh
-  brew install gh git nvm rsync zsh-autosuggestions zsh-history-substring-search zsh-syntax-highlighting
-  ```
-- Terminal
-  ```sh
-  bunx zshify
-  ```
+
+```sh
+brew install gh
+brew install git
+brew install nvm
+brew install rsync
+brew install zsh-autosuggestions
+brew install zsh-history-substring-search
+brew install zsh-syntax-highlighting
+```
+
+- Post `nvm install --lts`
+
+```sh
+corepack enable pnpm
+corepack enable yarn
+```
