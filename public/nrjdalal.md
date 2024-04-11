@@ -49,12 +49,12 @@
 <p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Open Source Work</p>
 
 - **[rdt.li](https://rdt.li)** - SAAS product or a self hostable url shortener, alternative to bit.ly
-  - 195+ stars on Github
+  - 200+ stars on Github
   - Over 190 active users
   - to know more about the project, visit [rdt.li](https://rdt.li) or [README.md](https://github.com/nrjdalal/rdt.li)
 - **[shadcn/ui snippets](https://github.com/nrjdalal/shadcn-ui-snippets)** - VS Code extension to add snippets for [shadcn/ui](https://ui.shadcn.com)
-  - 70+ stars on Github
-  - 600+ installs on VS Code
+  - 75+ stars on Github
+  - 650+ installs in VS Code
   - to know more about the project, visit [VS Code Extension Store](https://marketplace.visualstudio.com/items?itemName=VeroXyle.shadcn-ui-snippets)
 - **[40+ public projects](https://github.com/nrjdalal)** - including worldwide used gists, npm libraries, VS Code extensions, server management scripts, and much more
 
