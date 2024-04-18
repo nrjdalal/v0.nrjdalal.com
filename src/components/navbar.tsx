@@ -18,7 +18,7 @@ export const Navbar = () => {
         <Link href={'https://x.com/nrjdalal_com'} target="_blank">
           <Twitter className="text-blue-500" />
         </Link>
-        <Link href={'https://instagram.com/nrjdalal'} target="_blank">
+        <Link href={'https://instagram.com/nd941z'} target="_blank">
           <Instagram className="text-pink-500" />
         </Link>
       </div>
