@@ -1,7 +1,7 @@
+import { CopyCode } from '@/components/copyCode'
 import { ArrowUpRight } from 'lucide-react'
 import type { MDXComponents } from 'mdx/types'
 import Link from 'next/link'
-import { CopyCode } from './components/copyCode'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
