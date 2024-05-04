@@ -24,6 +24,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     code: (props) => {
       const { children } = props as any
 
+      if (children.indexOf('\n') === -1) {
+        return <code>{children}</code>
+      }
+
       return <CopyCode>{children}</CopyCode>
     },
   }
