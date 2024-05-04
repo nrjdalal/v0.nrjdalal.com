@@ -27,7 +27,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       return (
         <blockquote
           {...props}
-          className="rounded-lg border-[1px] bg-gray-100 py-px pr-2 !text-black"
+          className="rounded-lg border-[1px] bg-gray-100 py-px pr-4 !text-black"
         >
           {children}
         </blockquote>
