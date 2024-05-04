@@ -14,11 +14,23 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           href={href}
           target="_blank"
           {...rest}
-          className="not-prose flex gap-1"
+          className="not-prose inline-flex gap-1 font-medium"
         >
           {props.children}
           <ArrowUpRight className="mt-0.5 h-4 w-4 text-blue-600" />
         </Link>
+      )
+    },
+    blockquote: (props) => {
+      const { children } = props as any
+
+      return (
+        <blockquote
+          {...props}
+          className="rounded-lg border-[1px] bg-gray-100 py-px pr-2 !text-black"
+        >
+          {children}
+        </blockquote>
       )
     },
     code: (props) => {

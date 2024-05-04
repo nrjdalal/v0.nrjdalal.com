@@ -18,11 +18,11 @@ export const CopyCode = ({ children }: { children: any }) => {
     <div className="relative">
       <button
         onClick={copyToClipboard}
-        className="absolute -top-2 right-0 rounded-md bg-gray-800 p-1 text-white"
+        className="absolute -top-1 right-0 rounded-md bg-gray-800 p-1 text-white"
       >
         {isCopied ? <CopyCheck className="text-green-400" /> : <Copy />}
       </button>
-      <pre className="m-0 rounded-md bg-gray-800 p-0 pt-7 text-white">
+      <pre className="m-0 rounded-md bg-gray-800 p-0 pt-8 text-white">
         <code>{children}</code>
       </pre>
     </div>
