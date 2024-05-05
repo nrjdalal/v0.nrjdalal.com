@@ -92,14 +92,14 @@ const Page = async () => {
   const blogs = await getBlogs()
 
   return (
-    <main className="container mx-auto max-w-screen-xl text-slate-800">
+    <main className="container mx-auto max-w-screen-xl">
       <Navbar />
 
       {
         // ~ About
       }
-      <div className="mx-2.5 flex flex-col justify-center border-t border-slate-800 px-2.5 py-20 font-medium md:py-60">
-        <p className="text-2xl text-amber-600 md:text-3xl">
+      <div className="border-foreground/25 mx-2.5 flex flex-col justify-center border-t px-2.5 py-20 font-medium md:py-60">
+        <p className="text-2xl text-amber-600 md:text-3xl dark:text-amber-500 ">
           Dream. Sometimes you got to close your eyes and envision the future.
         </p>
 
@@ -115,8 +115,8 @@ const Page = async () => {
       {
         // ~ Blog
       }
-      <div className="mx-5 border-t border-slate-300 py-20  lg:py-28">
-        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl">
+      <div className="border-foreground/25 mx-5 border-t py-20  lg:py-28">
+        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl dark:text-amber-500">
           Blogs
         </h2>
 
@@ -174,8 +174,8 @@ const Page = async () => {
       {
         // ~ Github
       }
-      <div className="mx-5 border-t border-slate-300 py-20  lg:py-28">
-        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl">
+      <div className="border-foreground/25 mx-5 border-t py-20  lg:py-28">
+        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl dark:text-amber-500">
           Github
         </h2>
 
@@ -228,8 +228,8 @@ const Page = async () => {
       {
         // ~ Contact
       }
-      <div className="mx-5 border-t border-slate-300 py-20  lg:py-28">
-        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl">
+      <div className="border-foreground/25 mx-5 border-t py-20  lg:py-28">
+        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl dark:text-amber-500">
           Contact
         </h2>
 
@@ -280,7 +280,7 @@ const BlogLinks = ({
 }) => {
   return (
     <Link href={href}>
-      <div className="h-full rounded-lg border border-slate-300 font-medium">
+      <div className="border-foreground/25 h-full rounded-lg border font-medium">
         <div className="flex h-7 w-full items-center gap-x-2 px-3">
           <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
@@ -288,11 +288,11 @@ const BlogLinks = ({
         </div>
         <div className="relative h-full p-5 pb-10">
           <h2 className="text-xl md:text-2xl">{title}</h2>
-          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
+          <p className="mt-2 w-full rounded-md border border-amber-600 px-2 py-0.5 text-xs text-amber-600 dark:border-amber-500 dark:text-amber-500">
             {tags}
           </p>
-          <p className="pt-4 text-lg text-slate-500">{description}</p>
-          <div className="absolute bottom-10 right-5 mt-auto w-full text-right text-[0.6rem] capitalize text-slate-700">
+          <p className="text-foreground/50 pt-4 text-lg">{description}</p>
+          <div className="text-foreground/50 absolute bottom-10 right-5 mt-auto w-full text-right text-[0.6rem] capitalize">
             <TimeAgo time={time} />
           </div>
         </div>
@@ -314,7 +314,7 @@ const GithubLinks = ({
 }) => {
   return (
     <Link href={href} target="_blank">
-      <div className="h-full rounded-lg border border-slate-300 font-medium">
+      <div className="border-foreground/25 h-full rounded-lg border font-medium">
         <div className="flex h-7 w-full items-center gap-x-2 px-3">
           <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
@@ -322,10 +322,10 @@ const GithubLinks = ({
         </div>
         <div className="p-5">
           <h2 className="text-xl md:text-2xl">{title}</h2>
-          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
+          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600 dark:border-amber-500 dark:text-amber-500">
             {type}
           </p>
-          <p className="pt-4 text-lg text-slate-500">{children}</p>
+          <p className="text-foreground/50 pt-4 text-lg">{children}</p>
         </div>
       </div>
     </Link>
@@ -346,9 +346,9 @@ const Projects = ({
   demo?: string
 }) => {
   return (
-    <div className="mx-5 flex flex-col border-t border-slate-300 lg:py-10">
+    <div className="border-foreground/25 mx-5 flex flex-col border-t lg:py-10">
       <div className="grid gap-x-16 gap-y-12 py-20 lg:grid-cols-2">
-        <div className="overflow-hidden rounded-lg border border-slate-300">
+        <div className="border-foreground/25 overflow-hidden rounded-lg border">
           <div className="flex h-7 w-full items-center gap-x-2 px-3">
             <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
             <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
@@ -362,13 +362,13 @@ const Projects = ({
         <div className="flex flex-col justify-center font-medium">
           <h2 className="text-2xl md:text-3xl">{title}</h2>
 
-          <div className="pt-8 text-xl text-slate-500">{children}</div>
+          <div className="text-foreground/50 pt-8 text-xl">{children}</div>
 
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href={href}
               target="_blank"
-              className="w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600"
+              className="w-max rounded-xl border border-amber-600 px-4 py-2 text-amber-600 dark:border-amber-500 dark:text-amber-500"
             >
               Visit Website
             </Link>
@@ -402,7 +402,7 @@ const ContactLinks = ({
 }) => {
   return (
     <Link href={href}>
-      <div className="h-full rounded-lg border border-slate-300 font-medium">
+      <div className="border-foreground/25 h-full rounded-lg border font-medium">
         <div className="flex h-7 w-full items-center gap-x-2 px-3">
           <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
@@ -410,10 +410,10 @@ const ContactLinks = ({
         </div>
         <div className="p-5">
           <h2 className="text-lg md:text-xl">{title}</h2>
-          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600">
+          <p className="mt-2 w-max rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600 dark:border-amber-500 dark:text-amber-500">
             {type}
           </p>
-          <p className="pt-4 text-lg text-slate-500">{children}</p>
+          <p className="text-foreground/50 pt-4 text-lg">{children}</p>
         </div>
       </div>
     </Link>

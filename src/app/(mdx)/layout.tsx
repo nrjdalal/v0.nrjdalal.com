@@ -21,10 +21,10 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
       {
         // ~ About
       }
-      <div className="mx-2.5 border-t border-slate-800 px-2.5 pt-10 font-medium" />
+      <div className="border-foreground/30 mx-2.5 border-t px-2.5 pt-10 font-medium" />
 
       <div className="flex justify-center">
-        <article className="prose w-full max-w-screen-xl px-5 pb-20 pt-10 prose-a:font-normal prose-a:no-underline prose-blockquote:text-blue-600">
+        <article className="text-foreground prose-headings:text-foreground prose-hr:border-foreground/30 prose w-full max-w-screen-xl px-5 pb-20 pt-10">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-5">
               <Link
@@ -33,17 +33,17 @@ export default function MdxLayout({ children }: { children: React.ReactNode }) {
               >
                 BACK
               </Link>
-              <p className="border-px select-none rounded-md bg-slate-100 px-3 py-1 text-xs text-slate-500">
+              <p className="border-px text-foreground/60 bg-foreground/10 select-none rounded-md px-3 py-1 text-xs">
                 {segment.join(' / ')}
               </p>
             </div>
 
             <Link
-              className="flex items-center gap-2 text-xs"
+              className="text-foreground/75 flex items-center gap-2 text-xs no-underline"
               href={githubLink}
               target="_blank"
             >
-              Edit <Pencil className="h-3.5 w-3.5 text-slate-500" />
+              Edit <Pencil className="text-foreground/50 h-3.5 w-3.5" />
             </Link>
           </div>
 
