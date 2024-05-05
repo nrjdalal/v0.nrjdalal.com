@@ -1,13 +1,13 @@
 'use client'
 
 import { Copy, CopyCheck } from 'lucide-react'
-import { useState } from 'react'
+import { Fragment, isValidElement, ReactNode, useState } from 'react'
 
-export const CopyCode = ({ children }: { children: any }) => {
+export const CopyCode = ({ children, raw }: { children: any; raw: any }) => {
   const [isCopied, setIsCopied] = useState(false)
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(children)
+    navigator.clipboard.writeText(raw)
     setIsCopied(true)
     setTimeout(() => {
       setIsCopied(false)

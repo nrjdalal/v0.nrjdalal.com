@@ -35,13 +35,13 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       )
     },
     code: (props) => {
-      const { children } = props as any
+      const { children, __rawString__ } = props as any
 
       if (children.indexOf('\n') === -1) {
         return <code>{children}</code>
       }
 
-      return <CopyCode>{children}</CopyCode>
+      return <CopyCode raw={__rawString__}>{children}</CopyCode>
     },
   }
 }

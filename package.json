@@ -31,7 +31,8 @@
     "rehype-highlight": "^7.0.0",
     "remark-gfm": "^4.0.0",
     "sharp": "^0.33.1",
-    "tailwind-merge": "^2.0.0"
+    "tailwind-merge": "^2.0.0",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",

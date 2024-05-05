@@ -1,5 +1,6 @@
 import createMDX from '@next/mdx'
 import rehypeHighlight from 'rehype-highlight'
+import { visit } from 'unist-util-visit'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -8,7 +9,31 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-    rehypePlugins: [rehypeHighlight],
+    rehypePlugins: [
+      () => (tree) => {
+        visit(tree, (node) => {
+          if (node?.type === 'element' && node?.tagName === 'pre') {
+            const [codeElement] = node.children
+            if (codeElement.tagName !== 'code') return
+
+            node.__rawString__ = codeNode.children[0]?.value
+          }
+        })
+      },
+      rehypeHighlight,
+      () => (tree) => {
+        visit(tree, (node) => {
+          if (node?.type === 'element' && node?.tagName === 'pre') {
+            const preElement = node.children.at(-1)
+
+            preElement.properties = {
+              ...preElement.properties,
+              __rawString__: node.__rawString__,
+            }
+          }
+        })
+      },
+    ],
   },
 })
 
