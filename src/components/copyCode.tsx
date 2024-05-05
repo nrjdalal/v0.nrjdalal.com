@@ -22,7 +22,7 @@ export const CopyCode = ({ children, raw }: { children: any; raw: any }) => {
       >
         {isCopied ? (
           <>
-            <span className="flex items-center gap-x-1 rounded-md bg-white px-1 text-black">
+            <span className="flex items-center gap-x-1 rounded-md bg-white pl-2 pr-1.5 text-black">
               Copied!
             </span>
             <Check className="text-green-400" />
