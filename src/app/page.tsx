@@ -60,6 +60,7 @@ const getBlogs = async () => {
       .replaceAll('\n', ' ')
       .split(', }  #')[0]
       .split('metadata = {   ')[1]
+      .replaceAll('     ', ' ')
       .split(',   ')
 
     const title = text[0].split('title: ')[1].slice(1, -1)
