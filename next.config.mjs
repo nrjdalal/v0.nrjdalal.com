@@ -16,7 +16,7 @@ const withMDX = createMDX({
             const [codeElement] = node.children
             if (codeElement.tagName !== 'code') return
 
-            node.__rawString__ = codeNode.children[0]?.value
+            node.__rawString__ = codeElement.children[0]?.value
           }
         })
       },
