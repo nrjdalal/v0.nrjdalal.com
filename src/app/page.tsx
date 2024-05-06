@@ -288,7 +288,7 @@ const BlogLinks = ({
         </div>
         <div className="relative h-full p-5 pb-10">
           <h2 className="text-xl md:text-2xl">{title}</h2>
-          <div className="mt-1 flex flex-wrap gap-1">
+          <div className="mt-1 flex flex-wrap gap-1.5">
             {tags.split(',').map((tag: string) => (
               <span
                 className="rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600 dark:border-amber-500 dark:text-amber-500"
