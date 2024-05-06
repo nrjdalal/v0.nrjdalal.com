@@ -38,7 +38,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       const { children, __rawString__ } = props as any
 
       if (children.indexOf('\n') === -1) {
-        return <code className="text-foreground/75">{children}</code>
+        return (
+          <code className="text-blue-600 dark:text-blue-500">{children}</code>
+        )
       }
 
       return <CopyCode raw={__rawString__}>{children}</CopyCode>
