@@ -120,7 +120,7 @@ const Page = async () => {
           Blogs
         </h2>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           {blogs.map((blog: any) => (
             <BlogLinks
               key={blog.slug}
@@ -179,7 +179,7 @@ const Page = async () => {
           Github
         </h2>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           <GithubLinks
             href="https://github.com/nrjdalal/rdt-li"
             title="rdt-li"
@@ -233,7 +233,7 @@ const Page = async () => {
           Contact
         </h2>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           <ContactLinks
             href="mailto:nd941z@gmail.com"
             title="Let's chat ..."
@@ -288,9 +288,16 @@ const BlogLinks = ({
         </div>
         <div className="relative h-full p-5 pb-10">
           <h2 className="text-xl md:text-2xl">{title}</h2>
-          <p className="mt-2 w-full rounded-md border border-amber-600 px-2 py-0.5 text-xs text-amber-600 dark:border-amber-500 dark:text-amber-500">
-            {tags}
-          </p>
+          <div className="mt-1 flex flex-wrap gap-1">
+            {tags.split(',').map((tag: string) => (
+              <span
+                className="rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600 dark:border-amber-500 dark:text-amber-500"
+                key={tag}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
           <p className="pt-4 text-lg text-foreground/50">{description}</p>
           <div className="absolute bottom-10 right-5 mt-auto w-full text-right text-[0.6rem] capitalize text-foreground/50">
             <TimeAgo time={time} />
