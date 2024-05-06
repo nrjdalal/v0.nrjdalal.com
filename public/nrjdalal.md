@@ -50,11 +50,11 @@
 
 - **[rdt.li](https://rdt.li)** - SAAS product or a self hostable url shortener, alternative to bit.ly
   - 200+ stars on Github
-  - Over 190 active users
+  - Over 200 active users
   - to know more about the project, visit [rdt.li](https://rdt.li) or [README.md](https://github.com/nrjdalal/rdt.li)
 - **[shadcn/ui snippets](https://github.com/nrjdalal/shadcn-ui-snippets)** - VS Code extension to add snippets for [shadcn/ui](https://ui.shadcn.com)
   - 75+ stars on Github
-  - 650+ installs in VS Code
+  - 1250+ installs in VS Code
   - to know more about the project, visit [VS Code Extension Store](https://marketplace.visualstudio.com/items?itemName=VeroXyle.shadcn-ui-snippets)
 - **[40+ public projects](https://github.com/nrjdalal)** - including worldwide used gists, npm libraries, VS Code extensions, server management scripts, and much more
 
