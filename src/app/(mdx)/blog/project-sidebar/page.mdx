@@ -30,7 +30,7 @@ const expandMenu = ({
   data,
   keyIdentifier = 'title',
   valueIdentifier = 'href',
-  submenuIdentifier = 'submenu',
+  submenuIdentifier = 'items',
 }) => {
   const result = []
 
@@ -66,4 +66,34 @@ const expandMenu = ({
 }
 
 console.log(JSON.stringify(expandMenu({ data: menu }), null, 2))
+```
+
+### Output
+
+```json
+[
+  {
+    "title": "Admin",
+    "items": [
+      {
+        "title": "Dashboard",
+        "href": "/dashboard"
+      },
+      {
+        "title": "Orders",
+        "href": "/dashboard/orders",
+        "items": [
+          {
+            "title": "Pending",
+            "href": "/dashboard/orders/pending"
+          }
+        ]
+      },
+      {
+        "title": "Products",
+        "href": "/dashboard/products"
+      }
+    ]
+  }
+]
 ```
