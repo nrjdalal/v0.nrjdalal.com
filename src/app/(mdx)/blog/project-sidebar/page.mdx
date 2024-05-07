@@ -1,0 +1,69 @@
+export const metadata = {
+  title: 'Project Sidebar',
+  description: 'Figuring out sidenav like a pro',
+  tags: 'Next.js, React, Web Development',
+}
+
+# {metadata.title}
+
+{metadata.description}
+
+---
+
+> This project is currently in progress. Even if it doesn't make sense, check back later for updates.
+
+### Expand menu like a pro
+
+```js
+const menu = {
+  Admin: {
+    Dashboard: '/dashboard',
+    Orders: {
+      _href_: '/dashboard/orders',
+      Pending: '/dashboard/orders/pending',
+    },
+    Products: '/dashboard/products',
+  },
+}
+
+const expandMenu = ({
+  data,
+  keyIdentifier = 'title',
+  valueIdentifier = 'href',
+  submenuIdentifier = 'submenu',
+}) => {
+  const result = []
+
+  for (const key in data) {
+    const value = data[key]
+
+    if (
+      typeof value === 'string' &&
+      !(key.startsWith('_') && key.endsWith('_'))
+    ) {
+      result.push({ [keyIdentifier]: key, [valueIdentifier]: value })
+    }
+
+    if (typeof value === 'object') {
+      if (Array.isArray(value)) {
+        continue
+      }
+
+      result.push({
+        [keyIdentifier]: key,
+        ...Object.entries(value).reduce((acc, [k, v]) => {
+          if (k.startsWith('_') && k.endsWith('_')) {
+            acc[k.slice(1, -1)] = v
+          }
+          return acc
+        }, {}),
+        [submenuIdentifier]: expandMenu({ data: value }),
+      })
+    }
+  }
+
+  return result
+}
+
+console.log(JSON.stringify(expandMenu({ data: menu }), null, 2))
+```
