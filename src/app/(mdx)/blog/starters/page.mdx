@@ -1,0 +1,99 @@
+export const metadata = {
+  title: 'Stripe Payments',
+  description: 'A guide for setting up Stripe payments in your Next.js site.',
+  tags: 'Web Development, Starter, Resources',
+}
+
+# {metadata.title}
+
+{metadata.description}
+
+---
+
+### Product Generation
+
+```js
+import fs from 'fs/promises'
+import slugify from '@sindresorhus/slugify'
+import Stripe from 'stripe'
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+
+const stripeItems = [
+  // One-time Payments
+  {
+    name: 'Starter Pack',
+    amount: 5,
+    currency: 'usd',
+  },
+  {
+    name: 'Pro Pack',
+    amount: 10,
+    currency: 'usd',
+  },
+  {
+    name: 'Premium Pack',
+    amount: 15,
+    currency: 'usd',
+  },
+  // Recurring Payments
+  {
+    name: 'Pro Plan',
+    amount: 5,
+    currency: 'usd',
+    recurring: {
+      interval: 'month',
+    },
+  },
+  {
+    name: 'Premium Plan',
+    amount: 10,
+    currency: 'usd',
+    recurring: {
+      interval: 'month',
+    },
+  },
+]
+
+const createProducts = async (stripeItems) => {
+  const products = []
+
+  for (const item of stripeItems) {
+    const id = `prod_${slugify(item.name, { separator: '_' })}`
+
+    try {
+      const product = await stripe.prices.create({
+        product_data: {
+          id,
+          name: item.name,
+        },
+        currency: item.currency,
+        unit_amount: item.amount * 100,
+        recurring: item.recurring,
+      })
+
+      products.push({
+        name: item.name,
+        ...Object.fromEntries(Object.entries(product)),
+        name: item.name,
+      })
+    } catch {
+      const product = await stripe.prices.list({
+        product: id,
+      })
+
+      products.push({
+        name: item.name,
+        ...Object.fromEntries(Object.entries(product.data[0])),
+      })
+    }
+  }
+
+  return products
+}
+
+await fs.writeFile(
+  'products.json',
+  JSON.stringify(await createProducts(stripeItems), null, 2),
+)
+```
