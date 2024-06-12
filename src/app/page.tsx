@@ -77,7 +77,7 @@ const getBlogs = async () => {
     } as any
   })
 
-  return blogsData
+  return blogsMeta
     .filter((blog: any) => blog.publish)
     .map((blog: any) => {
       const { title, description, tags } = blogsMeta.find(
