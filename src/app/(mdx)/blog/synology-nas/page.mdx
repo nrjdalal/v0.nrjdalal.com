@@ -2,6 +2,7 @@ export const metadata = {
   title: 'Synology NAS',
   description: 'Setting up my Synology NAS',
   tags: 'Easy Access, Self Management',
+  publish: false,
 }
 
 # {metadata.title}
@@ -10,4 +11,25 @@ export const metadata = {
 
 ---
 
-### Synology NAS
+1. portainer-ce
+
+```sh
+sudo docker run -d -p 8000:8000 -p 9000:9000 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /volume1/docker/portainer-ce:/data portainer/portainer-ce:latest
+```
+
+2. nginx-proxy-manager
+
+```yaml
+version: '3.8'
+services:
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '5080:80'
+      - '5081:81'
+      - '5443:443'
+    volumes:
+      - /volume1/docker/nginx/data:/data
+      - /volume1/docker/nginx/etc/letsencrypt:/etc/letsencrypt
+```

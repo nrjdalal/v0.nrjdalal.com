@@ -66,16 +66,19 @@ const getBlogs = async () => {
     const title = text[0].split('title: ')[1].slice(1, -1)
     const description = text[1].split('description: ')[1].slice(1, -1)
     const tags = text[2]?.split('tags: ')[1].slice(1, -1) || 'Untagged'
+    const publish = text[3]?.split('publish: ')[1].slice(1, -1) || true
 
     return {
       slug,
       title,
       description,
       tags,
+      publish,
     } as any
   })
 
   return blogsData
+    .filter((blog: any) => blog.publish)
     .map((blog: any) => {
       const { title, description, tags } = blogsMeta.find(
         (item: any) => item.slug === blog.slug,
