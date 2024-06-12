@@ -51,6 +51,7 @@ const getBlogs = async () => {
     `https://raw.githubusercontent.com/${username}/${repository}/main/${path}/${slug}/page.mdx`
 
   const blogsData = await blogJson(githubBlogs)
+
   const blogsSlugs = blogsData.map((blog: any) => blog.slug)
 
   const blogsMeta = await pMap(blogsSlugs, async (slug: string) => {
@@ -63,10 +64,14 @@ const getBlogs = async () => {
       .replaceAll('     ', ' ')
       .split(',   ')
 
+    console.log(text)
+
     const title = text[0].split('title: ')[1].slice(1, -1)
     const description = text[1].split('description: ')[1].slice(1, -1)
     const tags = text[2]?.split('tags: ')[1].slice(1, -1) || 'Untagged'
-    const publish = text[3]?.split('publish: ')[1].slice(1, -1) || true
+    const publish = new RegExp('true').test(
+      text[3]?.split('publish: ')[1] || 'true',
+    )
 
     return {
       slug,
@@ -77,7 +82,13 @@ const getBlogs = async () => {
     } as any
   })
 
-  return blogsMeta
+  const data = blogsData.map((blog: any) => {
+    const matchMeta = blogsMeta.find((item: any) => item.slug === blog.slug)
+
+    return { ...blog, ...matchMeta }
+  })
+
+  return data
     .filter((blog: any) => blog.publish)
     .map((blog: any) => {
       const { title, description, tags } = blogsMeta.find(
