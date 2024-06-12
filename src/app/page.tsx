@@ -64,23 +64,23 @@ const getBlogs = async () => {
       .replaceAll('     ', ' ')
       .split(',   ')
 
-    console.log(text)
-
-    const title = text[0].split('title: ')[1].slice(1, -1)
-    const description = text[1].split('description: ')[1].slice(1, -1)
-    const tags = text[2]?.split('tags: ')[1].slice(1, -1) || 'Untagged'
-    const publish = new RegExp('true').test(
-      text[3]?.split('publish: ')[1] || 'true',
-    )
+    const KeyFinder = (key: string) =>
+      text.find((item: any) => item.startsWith(key))
 
     return {
       slug,
-      title,
-      description,
-      tags,
-      publish,
+      title: KeyFinder('title')?.split('title: ')[1].slice(1, -1),
+      description: KeyFinder('description')
+        ?.split('description: ')[1]
+        .slice(1, -1),
+      tags: KeyFinder('tags')?.split('tags: ')[1].slice(1, -1),
+      publish: new RegExp('true').test(
+        KeyFinder('publish')?.split('publish: ')[1] || 'true',
+      ),
     } as any
   })
+
+  console.log(blogsMeta)
 
   const data = blogsData.map((blog: any) => {
     const matchMeta = blogsMeta.find((item: any) => item.slug === blog.slug)
