@@ -77,6 +77,9 @@ const getBlogs = async () => {
       publish: new RegExp('true').test(
         KeyFinder('publish')?.split('publish: ')[1] || 'true',
       ),
+      blog: new RegExp('true').test(
+        KeyFinder('blog')?.split('blog: ')[1] || 'true',
+      ),
     } as any
   })
 
@@ -135,16 +138,18 @@ const Page = async () => {
         </h2>
 
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-          {blogs.map((blog: any) => (
-            <BlogLinks
-              key={blog.slug}
-              href={`/blog/${blog.slug}`}
-              title={blog.title}
-              tags={blog.tags}
-              description={blog.description}
-              time={blog.date}
-            />
-          ))}
+          {blogs
+            .filter((blog: any) => blog.blog)
+            .map((blog: any) => (
+              <BlogLinks
+                key={blog.slug}
+                href={`/blog/${blog.slug}`}
+                title={blog.title}
+                tags={blog.tags}
+                description={blog.description}
+                time={blog.date}
+              />
+            ))}
         </div>
       </div>
 
@@ -236,6 +241,30 @@ const Page = async () => {
           >
             HTTP based Google Search Results scraper/parser
           </GithubLinks>
+        </div>
+      </div>
+
+      {
+        // ~ My Resources
+      }
+      <div className="mx-5 border-t border-foreground/25 py-20  lg:py-28">
+        <h2 className="mb-10 text-2xl font-medium text-amber-600 md:text-3xl dark:text-amber-500">
+          My Resources
+        </h2>
+
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {blogs
+            .filter((blog: any) => !blog.blog)
+            .map((blog: any) => (
+              <BlogLinks
+                key={blog.slug}
+                href={`/blog/${blog.slug}`}
+                title={blog.title}
+                tags={blog.tags}
+                description={blog.description}
+                time={blog.date}
+              />
+            ))}
         </div>
       </div>
 
