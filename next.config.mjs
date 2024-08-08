@@ -1,5 +1,6 @@
 import createMDX from '@next/mdx'
 import rehypeHighlight from 'rehype-highlight'
+import remarkGfm from 'remark-gfm'
 import { visit } from 'unist-util-visit'
 
 /** @type {import('next').NextConfig} */
@@ -9,6 +10,7 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
+    remarkPlugins: [remarkGfm],
     rehypePlugins: [
       () => (tree) => {
         visit(tree, (node) => {
