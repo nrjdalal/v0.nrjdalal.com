@@ -363,7 +363,7 @@ const GithubLinks = ({
   children: React.ReactNode
 }) => {
   return (
-    <Link href={href} target="_blank" data-umami-event={href}>
+    <Link href={href} target="_blank">
       <div className="h-full rounded-lg border border-foreground/25 font-medium">
         <div className="flex h-7 w-full items-center gap-x-2 px-3">
           <div className="h-3.5 w-3.5 rounded-full bg-red-400" />
