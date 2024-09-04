@@ -1,5 +1,5 @@
 <a href="https://nextjs.org">
-  <h1 align="center">Onset Next.js Starter</h1>
+  <h1 align="center">README.md to be updated soon.</h1>
 </a>
 
 <p align="center">
