@@ -201,7 +201,7 @@ const Page = async () => {
         <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
           <GithubLinks
             href="https://github.com/nrjdalal/rdt-li"
-            title="rdt-li 250+ stars"
+            title="rdt-li"
             type="Next.js App"
           >
             rdt.li self hostable, feature rich, minimalistic and open source URL
@@ -210,7 +210,7 @@ const Page = async () => {
 
           <GithubLinks
             href="https://github.com/nrjdalal/shadcn-ui-snippets"
-            title="Shadcn UI Snippets 100+ stars"
+            title="Shadcn UI Snippets"
             type="VS Code Extension"
           >
             Simply import and use shadcn-ui components in your project
@@ -218,7 +218,7 @@ const Page = async () => {
 
           <GithubLinks
             href="https://github.com/nrjdalal/onset"
-            title="Onset 50+ stars"
+            title="Onset"
             type="Starter Template"
           >
             An open source Next.js bare starter with step-by-step instructions
