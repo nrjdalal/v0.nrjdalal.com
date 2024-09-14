@@ -17,12 +17,15 @@ export const metadata = {
 
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/nrjdalal/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
 
 - post brew
 
 ```sh
-brew install mas nvm
+brew install mas
+brew install nvm
 brew install fzf
 brew install gh
 brew install git
@@ -31,6 +34,15 @@ brew install zoxide
 brew install zsh-autosuggestions
 brew install zsh-history-substring-search
 brew install zsh-syntax-highlighting
+```
+
+- bun
+
+```sh
+curl -fsSL https://bun.sh/install | bash
+export BUN_INSTALL="$HOME/.bun" 
+export PATH="$BUN_INSTALL/bin:$PATH"
+bunx zshify
 ```
 
 - nvm
@@ -47,13 +59,6 @@ corepack enable yarn
 git config --global user.name "Neeraj Dalal"
 git config --global user.email "admin@nrjdalal.com"
 git config --global init.defaultBranch "main"
-```
-
-- bun
-
-```sh
-curl -fsSL https://bun.sh/install | bash
-bunx zshify
 ```
 
 ### Apps
