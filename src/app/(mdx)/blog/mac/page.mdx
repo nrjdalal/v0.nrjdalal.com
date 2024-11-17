@@ -20,29 +20,12 @@ export const metadata = {
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/nrjdalal/.zprofile
 eval "$(/opt/homebrew/bin/brew shellenv)"
 ```
-
-- post brew
-
-```sh
-brew install mas
-brew install nvm
-brew install fzf
-brew install gh
-brew install git
-brew install rsync
-brew install zoxide
-brew install zsh-autosuggestions
-brew install zsh-history-substring-search
-brew install zsh-syntax-highlighting
-```
-
 - bun
 
 ```sh
 curl -fsSL https://bun.sh/install | bash
 export BUN_INSTALL="$HOME/.bun" 
 export PATH="$BUN_INSTALL/bin:$PATH"
-bunx zshify
 ```
 
 - nvm
@@ -51,28 +34,6 @@ bunx zshify
 nvm install --lts
 corepack enable pnpm
 corepack enable yarn
-```
-
-- git
-
-```sh
-git config --global user.name "Neeraj Dalal"
-git config --global user.email "admin@nrjdalal.com"
-git config --global init.defaultBranch "main"
-```
-
-### Apps
-
-```sh
-brew install --cask rectangle
-brew install --cask jordanbaird-ice
-brew install --cask google-chrome
-brew install --cask visual-studio-code
-brew install --cask qbittorrent
-brew install --cask iina
-brew install --cask affinity-designer
-brew install --cask affinity-photo
-brew install --cask affinity-publisher
 ```
 
 ### Apps (App Store)
