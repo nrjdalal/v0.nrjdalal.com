@@ -9,7 +9,7 @@
 <p style="border-bottom: 1px solid; padding-bottom: 32px; margin-top: 0; text-align: center;">
   Email: <a href="mailto:nd941z@gmail.com" style="color: #2563eb; text-decoration: underline;">nd941z@gmail.com</a>
   ·
-  Mobile: <a href="tel:+919891366155" style="color: #2563eb; text-decoration: underline;">+919891366155</a>
+  Mobile: <a href="tel:+919999373188" style="color: #2563eb; text-decoration: underline;">+919999373188</a>
 </p>
 
 <p style="font-size: 24px; font-style: italic; font-weight: 600; margin-bottom: 0;">Education</p>
@@ -30,7 +30,7 @@
     - engineered ways to use AWS Lambda as proxies to bypass the amazon.com captcha, saving 90% of the cost by not buying proxies
     - create an advance scraper to scrape whole websites, find broken amazon affiliate links, find out sites vulnerabilities and much more
       - scraping over 2000 pages in 5-10 mins
-    - re-wrote whole backend in Node.js and AWS Lambda with 300% performance improvement over older version which was written in Python
+    - re-wrote whole backend in Node.js and AWS Lambda with 50% performance improvement over older version which was written in Python
     - implemented queue system to handle multiple requests at the same time and also rate limit the requests
     - created a dashboard to manage multiple projects and see the stats
   - **[serpwe.com](https://serpwe.com)** - SAAS product to generate, keyword ideas and organize them into topical clusters
