@@ -39,11 +39,10 @@ This project is a Next.js application configured with TypeScript, ESLint, Tailwi
 
 ## Step by Step Copy Paste Guide
 
-1. **Create a New Next.js App**
+1. **Switch to an Empty Directory and Create a New Next.js App**
 
 ```sh
-npx create-next-app@latest awesomedir --typescript --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*"
-cd awesomedir
+npx create-next-app@latest --typescript --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*" .
 ```
 
 - Initializes a new Next.js project with TypeScript, ESLint, Tailwind CSS, a `src` directory, the new `app` directory structure, Turbopack for faster builds, and an import alias for cleaner imports.
@@ -151,11 +150,10 @@ This setup ensures a modern development workflow with TypeScript, ESLint, Tailwi
 
 ---
 
-> All in one copy pastable script:
+> All in one copy pastable script, don't forget to switch to an empty directory before running this.
 
 ```sh
-npx create-next-app@latest awesomedir --typescript --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*"
-cd awesomedir
+npx create-next-app@latest --typescript --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*" .
 npx shadcn@latest init -d <<EOF
 
 EOF
