@@ -35,103 +35,109 @@ This project is a Next.js application configured with TypeScript, ESLint, Tailwi
 
 1. **Create a New Next.js App**
 
-   ```sh
-   npx create-next-app@latest awesomedir --typescript --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*"
-   cd awesomedir
-   ```
+```sh
+npx create-next-app@latest awesomedir --typescript --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*"
+cd awesomedir
+```
 
-   - Initializes a new Next.js project with TypeScript, ESLint, Tailwind CSS, a `src` directory, the new `app` directory structure, Turbopack for faster builds, and an import alias for cleaner imports.
+- Initializes a new Next.js project with TypeScript, ESLint, Tailwind CSS, a `src` directory, the new `app` directory structure, Turbopack for faster builds, and an import alias for cleaner imports.
 
 2. **Initialize shadcn for Design System Components**
 
-   ```sh
-   npx shadcn@latest init -d <<EOF
+```sh
+npx shadcn@latest init -d <<EOF
 
-   EOF
-   npx shadcn@latest add -a <<EOF
+EOF
+npx shadcn@latest add -a <<EOF
 
-   EOF
-   ```
+EOF
+```
 
-   - Sets up shadcn, a design system component library, to maintain a consistent design language across the application.
+- Sets up shadcn, a design system component library, to maintain a consistent design language across the application.
 
 3. **Upgrade Tailwind CSS**
 
-   ```sh
-   npx @tailwindcss/upgrade@latest --force
-   ```
+```sh
+npx @tailwindcss/upgrade@latest --force
+```
 
-   - Upgrades Tailwind CSS to the latest version to ensure you are using the most recent features and fixes.
+- Upgrades Tailwind CSS to the latest version to ensure you are using the most recent features and fixes.
 
 4. **Add Development Dependencies**
 
-   ```sh
-   npm install -D @commitlint/cli @commitlint/config-conventional lint-staged prettier prettier-plugin-organize-imports prettier-plugin-tailwindcss simple-git-hooks sort-package-json
-   ```
+```sh
+npm install -D @commitlint/cli @commitlint/config-conventional lint-staged prettier prettier-plugin-organize-imports prettier-plugin-tailwindcss simple-git-hooks sort-package-json
+```
 
-   - Installs development dependencies to help maintain code quality, formatting, and enforcing commit message standards.
+- Installs development dependencies to help maintain code quality, formatting, and enforcing commit message standards.
 
 5. **Create Configuration Files**
 
-   - **.lintstagedrc**
+- **.lintstagedrc**
 
-     ```json
-     {
-       "*": ["prettier --write --ignore-unknown"],
-       "package.json": ["sort-package-json"]
-     }
-     ```
+```json
+cat <<EOF >.lintstagedrc
+{
+  "*": ["prettier --write --ignore-unknown"],
+  "package.json": ["sort-package-json"]
+}
+EOF
+```
 
-     - Configures lint-staged to format all files with Prettier and sort `package.json` during pre-commit.
+- Configures lint-staged to format all files with Prettier and sort `package.json` during pre-commit.
 
-   - **.prettierrc**
+- **.prettierrc**
 
-     ```json
-     {
-       "semi": false,
-       "plugins": [
-         "prettier-plugin-organize-imports",
-         "prettier-plugin-tailwindcss"
-       ]
-     }
-     ```
+```json
+cat <<EOF >.prettierrc
+{
+  "semi": false,
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
+  ]
+}
+EOF
+```
 
-     - Configures Prettier to avoid semicolons and use plugins for organizing imports and formatting Tailwind CSS classes.
+- Configures Prettier to avoid semicolons and use plugins for organizing imports and formatting Tailwind CSS classes.
 
-   - **.commitlintrc**
+- **.commitlintrc**
 
-     ```json
-     {
-       "extends": ["@commitlint/config-conventional"]
-     }
-     ```
+```json
+cat <<EOF >.commitlintrc
+{
+  "extends": ["@commitlint/config-conventional"]
+}
+EOF
+```
 
-     - Configures Commitlint to ensure commit messages follow the conventional format.
+- Configures Commitlint to ensure commit messages follow the conventional format.
 
 6. **Add Scripts to `package.json`**
 
-   ```sh
-   npx json -I -f package.json -e 'this.scripts.prepare="if [ -z \"$VERCEL_ENV\" ]; then simple-git-hooks; fi"'
-   npx json -I -f package.json -e 'this["simple-git-hooks"]={"pre-commit":"npx lint-staged --verbose","commit-msg":"npx commitlint --edit $1"}'
-   ```
+```sh
+npx json -I -f package.json -e 'this.scripts.prepare="if [ -z \"$VERCEL_ENV\" ]; then simple-git-hooks; fi"'
+npx json -I -f package.json -e 'this["simple-git-hooks"]={"pre-commit":"npx lint-staged --verbose","commit-msg":"npx commitlint --edit $1"}'
+```
 
-   - Adds a `prepare` script to set up git hooks with Simple Git Hooks unless in Vercel environment, and configures Simple Git Hooks to run lint-staged before commits and commitlint on commit messages.
+- Adds a `prepare` script to set up git hooks with Simple Git Hooks unless in Vercel environment, and configures Simple Git Hooks to run lint-staged before commits and commitlint on commit messages.
 
 7. **Sort `package.json` File**
 
-   ```sh
-   npx sort-package-json
-   ```
+```sh
+npx sort-package-json
+```
 
-   - Sorts the `package.json` file to maintain a consistent order of fields.
+- Sorts the `package.json` file to maintain a consistent order of fields.
 
 8. **Format All Files with Prettier**
 
-   ```sh
-   npx prettier --write --ignore-unknown *
-   ```
+```sh
+npx prettier --write --ignore-unknown *
+```
 
-   - Formats all files in the project using Prettier to ensure consistent code style.
+- Formats all files in the project using Prettier to ensure consistent code style.
 
 ## Conclusion
 
