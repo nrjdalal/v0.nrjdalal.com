@@ -45,5 +45,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
       return <CopyCode raw={__rawString__}>{children}</CopyCode>
     },
+    strong: (props) => {
+      const { children } = props as any
+
+      return <strong className="font-medium text-foreground">{children}</strong>
+    },
   }
 }

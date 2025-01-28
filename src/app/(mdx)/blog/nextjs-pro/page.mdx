@@ -1,0 +1,139 @@
+export const metadata = {
+  title:
+    'Setting Up a Next.js Project with Tailwind CSS, TypeScript, and Advanced Tooling',
+  description:
+    'A step-by-step guide to setting up a modern Next.js project with TypeScript, Tailwind CSS, and advanced tooling including ESLint, Prettier, Commitlint, and more. Learn how to create a robust development environment with automated code formatting, linting, and commit message validation.',
+  tags: 'Next.js, TypeScript, Tailwind CSS, ESLint, Prettier, Commitlint, Lint-staged, Simple Git Hooks, Turbopack, Shadcn, Web Development, JavaScript, Frontend',
+}
+
+# {metadata.title}
+
+{metadata.description}
+
+---
+
+# Project Setup for Next.js Blog
+
+## Overview
+
+This project is a Next.js application configured with TypeScript, ESLint, Tailwind CSS, Turbopack, and several other tools for a modern development workflow. The setup includes a design system using Shadcn, linting and formatting tools, and git hooks for commit message validation and code formatting.
+
+## Technologies and Packages Used
+
+- **Next.js**: A React framework for server-side rendered applications.
+- **TypeScript**: A typed superset of JavaScript for type safety and better developer experience.
+- **ESLint**: A tool for identifying and fixing problems in JavaScript code.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **Turbopack**: A new bundler for faster builds in Next.js.
+- **Shadcn**: A design system component library.
+- **Commitlint**: A tool for ensuring commit messages follow a conventional format.
+- **Lint-staged**: A tool for running linters on staged files in git.
+- **Prettier**: An opinionated code formatter.
+- **Simple Git Hooks**: A tool for managing git hooks.
+- **Sort Package JSON**: A tool for sorting the `package.json` file.
+
+## Setup Instructions
+
+1. **Create a New Next.js App**
+
+   ```sh
+   npx create-next-app@latest awesomedir --typescript --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*"
+   cd awesomedir
+   ```
+
+   - Initializes a new Next.js project with TypeScript, ESLint, Tailwind CSS, a `src` directory, the new `app` directory structure, Turbopack for faster builds, and an import alias for cleaner imports.
+
+2. **Initialize Shadcn for Design System Components**
+
+   ```sh
+   npx shadcn@latest init -d <<EOF
+
+   EOF
+   npx shadcn@latest add -a <<EOF
+
+   EOF
+   ```
+
+   - Sets up Shadcn, a design system component library, to maintain a consistent design language across the application.
+
+3. **Upgrade Tailwind CSS**
+
+   ```sh
+   npx @tailwindcss/upgrade@latest --force
+   ```
+
+   - Upgrades Tailwind CSS to the latest version to ensure you are using the most recent features and fixes.
+
+4. **Add Development Dependencies**
+
+   ```sh
+   npm install -D @commitlint/cli @commitlint/config-conventional lint-staged prettier prettier-plugin-organize-imports prettier-plugin-tailwindcss simple-git-hooks sort-package-json
+   ```
+
+   - Installs development dependencies to help maintain code quality, formatting, and enforcing commit message standards.
+
+5. **Create Configuration Files**
+
+   - **.lintstagedrc**
+
+     ```json
+     {
+       "*": ["prettier --write --ignore-unknown"],
+       "package.json": ["sort-package-json"]
+     }
+     ```
+
+     - Configures lint-staged to format all files with Prettier and sort `package.json` during pre-commit.
+
+   - **.prettierrc**
+
+     ```json
+     {
+       "semi": false,
+       "plugins": [
+         "prettier-plugin-organize-imports",
+         "prettier-plugin-tailwindcss"
+       ]
+     }
+     ```
+
+     - Configures Prettier to avoid semicolons and use plugins for organizing imports and formatting Tailwind CSS classes.
+
+   - **.commitlintrc**
+
+     ```json
+     {
+       "extends": ["@commitlint/config-conventional"]
+     }
+     ```
+
+     - Configures Commitlint to ensure commit messages follow the conventional format.
+
+6. **Add Scripts to `package.json`**
+
+   ```sh
+   npx json -I -f package.json -e 'this.scripts.prepare="if [ -z \"$VERCEL_ENV\" ]; then simple-git-hooks; fi"'
+   npx json -I -f package.json -e 'this["simple-git-hooks"]={"pre-commit":"npx lint-staged --verbose","commit-msg":"npx commitlint --edit $1"}'
+   ```
+
+   - Adds a `prepare` script to set up git hooks with Simple Git Hooks unless in Vercel environment, and configures Simple Git Hooks to run lint-staged before commits and commitlint on commit messages.
+
+7. **Sort `package.json` File**
+
+   ```sh
+   npx sort-package-json
+   ```
+
+   - Sorts the `package.json` file to maintain a consistent order of fields.
+
+8. **Format All Files with Prettier**
+
+   ```sh
+   npx prettier --write --ignore-unknown *
+   ```
+
+   - Formats all files in the project using Prettier to ensure consistent code style.
+
+## Conclusion
+
+This setup ensures a modern development workflow with TypeScript, ESLint, Tailwind CSS, and several other tools to maintain code quality and consistency. The integration of Shadcn provides a design system component library, while lint-staged and simple-git-hooks enforce code formatting and commit message standards.
