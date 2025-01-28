@@ -1,9 +1,8 @@
 export const metadata = {
-  title:
-    'Setting Up a Next.js Project with Tailwind CSS, TypeScript, and Advanced Tooling',
+  title: 'Setting Up Next.js with Tailwind CSS and TypeScript',
   description:
-    'A step-by-step guide to setting up a modern Next.js project with TypeScript, Tailwind CSS, and advanced tooling including ESLint, Prettier, Commitlint, and more. Learn how to create a robust development environment with automated code formatting, linting, and commit message validation.',
-  tags: 'Next.js, TypeScript, Tailwind CSS, ESLint, Prettier, Commitlint, Lint-staged, Simple Git Hooks, Turbopack, Shadcn, Web Development, JavaScript, Frontend',
+    'A guide to setting up a modern Next.js project with TypeScript, Tailwind CSS, and advanced tooling like ESLint, Prettier, and Commitlint.',
+  tags: 'Next.js, TypeScript, Tailwind CSS, Prettier, Commitlint, Lint-staged, Simple Git Hooks, shadcn, Web Development, JavaScript',
 }
 
 # {metadata.title}
@@ -16,7 +15,7 @@ export const metadata = {
 
 ## Overview
 
-This project is a Next.js application configured with TypeScript, ESLint, Tailwind CSS, Turbopack, and several other tools for a modern development workflow. The setup includes a design system using Shadcn, linting and formatting tools, and git hooks for commit message validation and code formatting.
+This project is a Next.js application configured with TypeScript, ESLint, Tailwind CSS, Turbopack, and several other tools for a modern development workflow. The setup includes a design system using shadcn, linting and formatting tools, and git hooks for commit message validation and code formatting.
 
 ## Technologies and Packages Used
 
@@ -25,7 +24,7 @@ This project is a Next.js application configured with TypeScript, ESLint, Tailwi
 - **ESLint**: A tool for identifying and fixing problems in JavaScript code.
 - **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
 - **Turbopack**: A new bundler for faster builds in Next.js.
-- **Shadcn**: A design system component library.
+- **shadcn**: A design system component library.
 - **Commitlint**: A tool for ensuring commit messages follow a conventional format.
 - **Lint-staged**: A tool for running linters on staged files in git.
 - **Prettier**: An opinionated code formatter.
@@ -43,7 +42,7 @@ This project is a Next.js application configured with TypeScript, ESLint, Tailwi
 
    - Initializes a new Next.js project with TypeScript, ESLint, Tailwind CSS, a `src` directory, the new `app` directory structure, Turbopack for faster builds, and an import alias for cleaner imports.
 
-2. **Initialize Shadcn for Design System Components**
+2. **Initialize shadcn for Design System Components**
 
    ```sh
    npx shadcn@latest init -d <<EOF
@@ -54,7 +53,7 @@ This project is a Next.js application configured with TypeScript, ESLint, Tailwi
    EOF
    ```
 
-   - Sets up Shadcn, a design system component library, to maintain a consistent design language across the application.
+   - Sets up shadcn, a design system component library, to maintain a consistent design language across the application.
 
 3. **Upgrade Tailwind CSS**
 
@@ -136,4 +135,4 @@ This project is a Next.js application configured with TypeScript, ESLint, Tailwi
 
 ## Conclusion
 
-This setup ensures a modern development workflow with TypeScript, ESLint, Tailwind CSS, and several other tools to maintain code quality and consistency. The integration of Shadcn provides a design system component library, while lint-staged and simple-git-hooks enforce code formatting and commit message standards.
+This setup ensures a modern development workflow with TypeScript, ESLint, Tailwind CSS, and several other tools to maintain code quality and consistency. The integration of shadcn provides a design system component library, while lint-staged and simple-git-hooks enforce code formatting and commit message standards.
