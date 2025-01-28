@@ -142,3 +142,44 @@ npx prettier --write --ignore-unknown *
 ## Conclusion
 
 This setup ensures a modern development workflow with TypeScript, ESLint, Tailwind CSS, and several other tools to maintain code quality and consistency. The integration of shadcn provides a design system component library, while lint-staged and simple-git-hooks enforce code formatting and commit message standards.
+
+---
+
+> All in one copy pastable script:
+
+```sh
+npx create-next-app@latest awesomedir --typescript --eslint --tailwind --src-dir --app --turbopack --import-alias "@/*"
+cd awesomedir
+npx shadcn@latest init -d <<EOF
+
+EOF
+npx shadcn@latest add -a <<EOF
+
+EOF
+npx @tailwindcss/upgrade@latest --force
+npm install -D @commitlint/cli @commitlint/config-conventional lint-staged prettier prettier-plugin-organize-imports prettier-plugin-tailwindcss simple-git-hooks sort-package-json
+cat <<EOF >.lintstagedrc
+{
+  "*": ["prettier --write --ignore-unknown"],
+  "package.json": ["sort-package-json"]
+}
+EOF
+cat <<EOF >.prettierrc
+{
+  "semi": false,
+  "plugins": [
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
+  ]
+}
+EOF
+cat <<EOF >.commitlintrc
+{
+  "extends": ["@commitlint/config-conventional"]
+}
+EOF
+npx json -I -f package.json -e 'this.scripts.prepare="if [ -z \"$VERCEL_ENV\" ]; then simple-git-hooks; fi"'
+npx json -I -f package.json -e 'this["simple-git-hooks"]={"pre-commit":"npx lint-staged --verbose","commit-msg":"npx commitlint --edit $1"}'
+npx sort-package-json
+npx prettier --write --ignore-unknown *
+```
