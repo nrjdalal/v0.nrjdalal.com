@@ -11,8 +11,6 @@ export const metadata = {
 
 ---
 
-# Improving npm with bun: A Better npm Experience
-
 In this blog post, we will explore a way to enhance your npm and npx commands by conditionally using `bun` if it is installed. This can provide a faster and more efficient package management experience. We'll go through a simple shell script that achieves this and explain how it works.
 
 ## Overview
@@ -58,19 +56,19 @@ fi
 Let's break down how this script works:
 
 1. **Checking for Bun**:
-   First, the script checks if `bun` is installed on your system by using the command `command -v bun &>/dev/null`. If `bun` is found, it proceeds to redefine the `npm` and `npx` commands.
+
+First, the script checks if `bun` is installed on your system by using the command `command -v bun &>/dev/null`. If `bun` is found, it proceeds to redefine the `npm` and `npx` commands.
 
 2. **Redefining npm and npx**:
 
-   - **Custom `npm` Function**: The script creates a new `npm` function. This function first checks if the command being run contains `--real` or if the `USE_REAL_NPM` environment variable is set.
-     - If `--real` is present or `USE_REAL_NPM` is set, it temporarily sets the `USE_REAL_NPM` variable, installs a `trap` to unset this variable upon exit, and then calls the original `npm` command by removing the `--real` flag from the arguments.
-     - If `--real` is not present, it uses `bun` to execute the command.
-   - **Custom `npx` Function**: Similarly, the script redefines the `npx` function. It checks for the `--real` flag or the `USE_REAL_NPX` environment variable.
-     - If `--real` is present or `USE_REAL_NPX` is set, it temporarily sets the `USE_REAL_NPX` variable, installs a `trap` to unset this variable upon exit, and calls the original `npx` command by removing the `--real` flag from the arguments.
-     - If `--real` is not present, it uses `bun x` to execute the command.
+- **Custom `npm` Function**: The script creates a new `npm` function. This function first checks if the command being run contains `--real` or if the `USE_REAL_NPM` environment variable is set.
+  - If `--real` is present or `USE_REAL_NPM` is set, it temporarily sets the `USE_REAL_NPM` variable, installs a `trap` to unset this variable upon exit, and then calls the original `npm` command by removing the `--real` flag from the arguments.
+  - If `--real` is not present, it uses `bun` to execute the command.
+- **Custom `npx` Function**: Similarly, a new `npx` function is defined. It follows the same logic as the `npm` function but uses `bunx` instead of `bun` to execute the command.
 
 3. **Fallback to Original Commands**:
-   If `bun` is not installed, the script simply defines the `npm` and `npx` functions to call the original commands without any modification.
+
+If `bun` is not installed, the script simply defines the `npm` and `npx` functions to call the original commands without any modification.
 
 ## Usage
 
