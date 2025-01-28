@@ -329,21 +329,30 @@ const BlogLinks = ({
           <div className="h-3.5 w-3.5 rounded-full bg-yellow-400" />
           <div className="h-3.5 w-3.5 rounded-full bg-green-400" />
         </div>
-        <div className="relative h-full p-5 pb-10">
-          <h2 className="text-xl md:text-2xl">{title}</h2>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {tags.split(',').map((tag: string) => (
-              <span
-                className="rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600 dark:border-amber-500 dark:text-amber-500"
-                key={tag}
-              >
-                {tag}
-              </span>
-            ))}
+        <div className="relative flex h-full flex-col justify-between p-5">
+          <div>
+            <h2 className="text-xl md:text-2xl">{title}</h2>
           </div>
-          <p className="pt-4 text-lg text-foreground/50">{description}</p>
-          <div className="absolute bottom-10 right-5 mt-auto w-full text-right text-[0.6rem] capitalize text-foreground/50">
-            <TimeAgo time={time} />
+          <div className="pb-10">
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {tags
+                .split(',')
+                .slice(0, 3)
+                .map((tag: string) => (
+                  <span
+                    className="rounded-full border border-amber-600 px-2 py-0.5 text-xs text-amber-600 dark:border-amber-500 dark:text-amber-500"
+                    key={tag}
+                  >
+                    {tag}
+                  </span>
+                ))}
+            </div>
+            <p className="line-clamp-2 pt-4 text-lg text-foreground/50">
+              {description}
+            </p>
+            <div className="absolute bottom-10 right-5 mt-auto w-full text-right text-[0.6rem] capitalize text-foreground/50">
+              <TimeAgo time={time} />
+            </div>
           </div>
         </div>
       </div>
