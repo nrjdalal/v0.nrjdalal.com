@@ -7,7 +7,7 @@ import pMap from 'p-map'
 const getBlogs = async () => {
   const githubBlogs = {
     username: 'nrjdalal',
-    repository: 'nrjdalal.com',
+    repository: 'v0.nrjdalal.com',
     path: 'src/app/(mdx)/blog',
   }
 
@@ -58,14 +58,14 @@ const getBlogs = async () => {
     const res = await fetch(rawText({ ...githubBlogs, slug }))
 
     const text = (await res.text())
-      .replaceAll('\n', ' ')
+      ?.replaceAll('\n', ' ')
       .split(', }  #')[0]
       .split('metadata = {   ')[1]
-      .replaceAll('     ', ' ')
+      ?.replaceAll('     ', ' ')
       .split(',   ')
 
     const KeyFinder = (key: string) =>
-      text.find((item: any) => item.startsWith(key))
+      text?.find((item: any) => item.startsWith(key))
 
     return {
       slug,
@@ -336,7 +336,7 @@ const BlogLinks = ({
           <div className="pb-10">
             <div className="mt-2 flex flex-wrap gap-1.5">
               {tags
-                .split(',')
+                ?.split(',')
                 .slice(0, 3)
                 .map((tag: string) => (
                   <span
