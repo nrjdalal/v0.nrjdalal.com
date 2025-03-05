@@ -7,7 +7,7 @@ import { useSelectedLayoutSegments } from 'next/navigation'
 
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
   const segment = useSelectedLayoutSegments()
-  const githubLink = `https://github.com/nrjdalal/nrjdalal.com/tree/main/src/app/(mdx)/${segment.join(
+  const githubLink = `https://github.com/nrjdalal/v0.nrjdalal.com/tree/main/src/app/(mdx)/${segment.join(
     '/',
   )}/page.mdx`
 
