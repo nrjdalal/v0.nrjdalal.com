@@ -185,8 +185,9 @@ const Page = async () => {
         demo="https://www.youtube.com/@SerpWe/videos"
       >
         <p>
-          Generate keyword ideas, group similar keywords, and organize them into
-          topical clusters - a product of Warewe
+          Generate thousands of keywords, cluster them into topics, and use AI
+          to create high-ranking, optimized content effortlessly - a product of
+          Warewe
         </p>
       </Projects>
 
