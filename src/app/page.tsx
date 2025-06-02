@@ -157,6 +157,17 @@ const Page = async () => {
         // ~ Projects
       }
       <Projects
+        src="/spacewall.me.png"
+        href="https://spacewall.me"
+        title="SpaceWall (Website Maker)"
+      >
+        <p>
+          SpaceWall is a free website maker. Create your own website in minutes
+          with no coding skills required.
+        </p>
+      </Projects>
+
+      <Projects
         src="/rdt.li.png"
         href="https://rdt.li"
         title="Redirect Link (SAAS Product)"
