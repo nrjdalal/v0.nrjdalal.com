@@ -1,0 +1,154 @@
+---
+title: "Learn Web Development"
+description: "How to get started in 2024, and some useful resources"
+createdAt: 2024-01-03
+publishedAt: 2024-01-03
+author: "Neeraj Dalal"
+tags: ["Web Development", "JavaScript", "Resources"]
+---
+
+> Starting in 2024? It has never been easier! The web is a great place to be, and it's only getting better.
+
+## Prerequisites
+
+- VS Code (Code editor)
+- Bun (An all-in-one JavaScript runtime) or Node.js
+
+## Getting started with HTML
+
+### What is HTML?
+
+---
+
+HTML is the standard markup language for creating Web pages.
+
+- HTML stands for Hyper Text Markup Language
+- HTML is the standard markup language for creating Web pages
+- HTML describes the structure of a Web page
+- HTML consists of a series of elements
+- HTML elements tell the browser how to display the content
+- HTML elements label pieces of content such as "this is a heading", "this is a paragraph", "this is a link", etc.
+
+#### A simple HTML document
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>My First Webpage</title>
+  </head>
+  <body>
+    <h1>This is my first webpage!</h1>
+  </body>
+</html>
+```
+
+- The `<!DOCTYPE html>` declaration defines that this document is an HTML5 document
+- The `<html>` element is the root element of an HTML page
+- The `<head>` element contains meta information about the HTML page
+- The `<title>` element specifies a title for the HTML page (which is shown in the browser's title bar or in the page's tab)
+- The `<body>` element defines the document's body, and is a container for all the visible contents, such as headings, paragraphs, images, hyperlinks, tables, lists, etc.
+- The `<h1>` element defines a large heading
+
+#### HTML Element
+
+- An HTML element is defined by a start tag, some content, and an end tag. For example, in `<h1>This is a heading</h1>`, `<h1>` is the start tag, `This is a heading` is the content, and `</h1>` is the end tag.
+
+We will learn more about HTML elements as we proceed.
+
+### How to run a HTML file locally? (Best way)
+
+---
+
+#### Web Browsers
+
+- The purpose of a web browser (Chrome, Edge, Firefox, Safari) is to read HTML documents and display them correctly.
+- A browser does not display the HTML tags, but uses them to determine how to display the document.
+
+1. #### Open VS Code and create a new file called `index.html` in a new folder called `learning-web-development`.
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>My First Webpage</title>
+  </head>
+  <body>
+    <h1>This is my first webpage!</h1>
+  </body>
+</html>
+```
+
+The content inside the `<body>` section will be displayed in a browser. The content inside the `<title>` element will be shown in the browser's title bar or in the page's tab.
+
+2. #### In terminal, navigate to the `learning-web-development` folder and run `bunx vite` to run a local server. The following should be displayed -
+
+```
+VITE v5.0.0  ready in 50 ms
+
+➜  Local:   http://localhost:5173/
+➜  Network: use --host to expose
+➜  press h + enter to show help
+```
+
+3. #### Open the link in your browser. The following should be displayed -
+
+### Anatomy of a HTML document
+
+---
+
+Let's take the previous example and break it down into smaller parts.
+
+```html
+<!doctype html>
+<html>
+  <head>
+    <title>My First Webpage</title>
+  </head>
+  <body>
+    <h1>This is my first webpage!</h1>
+  </body>
+</html>
+```
+
+```html
+<!doctype html>
+```
+
+> It is a required preamble. In the mists of time, when HTML was young (around 1991/92), doctypes were meant to act as links to a set of rules that the HTML page had to follow to be considered good HTML, which could mean automatic error checking and other useful things. However, these days, they don't do much and are basically just needed to make sure your document behaves correctly. That's all you need to know for now.
+
+```html
+<html>
+  ...
+</html>
+```
+
+> This element wraps all the content on the entire page and is sometimes known as the root element. It also includes the lang attribute, setting the primary language of the document.
+
+```html
+<head>
+  ...
+</head>
+```
+
+> This element acts as a container for all the stuff you want to include on the HTML page that isn't the content you are showing to your page's viewers. This includes things like keywords and a page description that you want to appear in search results, CSS to style our content, character set declarations, and more.
+
+```html
+<title>My First Webpage</title>
+```
+
+> This sets the title of your page, which is the title that appears in the browser tab the page is loaded in. It is also used to describe the page when you bookmark/favorite it.
+
+```html
+<body>
+  ...
+</body>
+```
+
+> This contains all the content that you want to show to web users when they visit your page, whether that's text, images, videos, games, playable audio tracks, or whatever else.
+
+```html
+<h1>This is my first webpage!</h1>
+```
+
+> Heading elements allow you to specify that certain parts of your content are headings — or subheadings. In the same way that a book has the main title, chapter titles, and subtitles, an HTML document can too. HTML contains 6 heading levels, \<h1> - \<h6>, although you'll commonly only use 3 to 4 at most

@@ -1,0 +1,65 @@
+---
+title: "Mac Setup"
+description: "Apps I use, CLI tools & more"
+createdAt: 2024-02-27
+publishedAt: 2024-02-27
+author: "Neeraj Dalal"
+tags: ["Easy Access", "Self Management"]
+---
+
+### Automatic
+
+```sh
+/bin/zsh -c "$(curl -fsSL https://rdt.li/zshify)"
+```
+
+### Initial
+
+- brew
+
+```sh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/nrjdalal/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
+```
+
+- bun
+
+```sh
+curl -fsSL https://bun.sh/install | bash
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+```
+
+- nvm
+
+```
+nvm install --lts
+corepack enable pnpm
+corepack enable yarn
+```
+
+### Apps (App Store)
+
+- Hand Mirror
+
+```sh
+mas install 1502839586
+```
+
+- MenubarX
+
+```sh
+mas install 1575588022
+```
+
+- Tot
+
+```sh
+mas install 1491071483
+```
+
+---
+
+[Script](https://raw.githubusercontent.com/nrjdalal/zshify/refs/heads/main/bin/script.zsh)
+[Update Config](https://github.com/nrjdalal/zshify/edit/main/config/profile.zsh)
