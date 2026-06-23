@@ -2,238 +2,163 @@
 
 import { site } from "@packages/config/site"
 import {
-  RiArrowRightUpLine,
-  RiDiscordFill,
+  RiArrowUpSLine,
+  RiCodeAiLine,
   RiGithubFill,
-  RiLoaderLine,
-  RiMenuLine,
+  RiLinkedinBoxFill,
+  RiMenu4Fill,
   RiTwitterXFill,
 } from "@remixicon/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
-import { Access } from "@/components/access"
 import { ModeToggle } from "@/components/mode-toggle"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { authClient } from "@/lib/auth/client"
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
 import { cn } from "@/lib/utils"
 
-const socialLinks = [
-  {
-    href: site.social.x,
-    icon: RiTwitterXFill,
-    label: "X",
-  },
-  {
-    href: site.social.discord,
-    icon: RiDiscordFill,
-    label: "Discord",
-  },
-  {
-    href: site.social.github,
-    icon: RiGithubFill,
-    label: "GitHub",
-  },
+const navItems = [
+  { name: "home", href: "/" },
+  { name: "blog", href: "/blog" },
+  { name: "projects", href: "/#projects" },
+  { name: "contact", href: "/#contact" },
 ]
 
-function SocialLinks({ onClick }: { onClick?: () => void }) {
-  return (
-    <div className="flex items-center gap-5 lg:gap-3">
-      {socialLinks
-        .filter((link) => link.href)
-        .map((link) => (
-          <Tooltip key={link.href}>
-            <TooltipTrigger
-              render={
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-foreground/60 hover:text-foreground transition-colors"
-                  aria-label={link.label}
-                  onClick={onClick}
-                />
-              }
-            >
-              <link.icon className="size-6" aria-hidden="true" />
-            </TooltipTrigger>
-            <TooltipContent>{link.label}</TooltipContent>
-          </Tooltip>
-        ))}
-    </div>
-  )
+const socialLinks = [
+  { href: "https://github.com/nrjdalal", icon: RiGithubFill, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/nrjdalal", icon: RiLinkedinBoxFill, label: "LinkedIn" },
+  { href: "https://x.com/nrjdalal_com", icon: RiTwitterXFill, label: "X" },
+]
+
+// Active when the route path matches. In-page anchor links (e.g. "/#projects") are never path-active.
+function isActive(pathname: string, href: string): boolean {
+  if (href.includes("#")) return false
+  const path = pathname.split(/[?#]/)[0]
+  if (href === "/") return path === "/"
+  return path === href || path.startsWith(`${href}/`)
 }
 
 export function Navbar() {
-  const pathname = usePathname()
-  const { data: session } = authClient.useSession()
+  const pathname = usePathname() || "/"
+  const [hovered, setHovered] = useState<string | null>(null)
+  const [open, setOpen] = useState(false)
 
-  const [toDashboard, setToDashboard] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-
-  useEffect(() => {
-    setToDashboard(false)
-  }, [pathname])
-
-  if (pathname?.startsWith("/console") || pathname?.startsWith("/dashboard")) return null
-
-  const navLinks = [
-    { href: "/docs", label: "Documentation" },
-    { href: "/api/docs", label: "API Docs", external: true },
-    { href: "/blog", label: "Blog" },
-  ]
+  if (pathname.startsWith("/console") || pathname.startsWith("/dashboard")) return null
 
   return (
-    <header className="bg-sidebar fixed top-0 left-0 z-50 w-full border-b">
-      <div className="flex min-h-14 items-center justify-between pr-5 pl-3.5">
-        <Link href="/" className="flex items-center gap-2 font-bold">
-          {site.name}
-        </Link>
-        <div className="flex items-center gap-2.5">
-          {/* Desktop Navigation */}
-          <nav aria-label="Main navigation" className="mx-5 hidden items-center gap-7.5 lg:flex">
-            {navLinks.map((link) => {
-              const isActive = !link.external && pathname?.startsWith(link.href)
-              if (link.external) {
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground/60 hover:text-foreground/80 font-medium transition-colors"
-                  >
-                    {link.label}
-                    <RiArrowRightUpLine className="-mt-3 inline size-3.5" />
-                  </a>
-                )
-              }
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "font-medium transition-colors",
-                    isActive ? "text-foreground" : "hover:text-foreground/80 text-foreground/60",
-                  )}
-                >
-                  {link.label}
-                </Link>
-              )
-            })}
-          </nav>
+    <header className="bg-background fixed top-0 left-0 z-50 flex h-14 w-full justify-between border-b">
+      <Link
+        href="/"
+        className="hover:bg-border/50 flex h-full items-center gap-x-2 px-5 font-mono font-medium transition-colors"
+      >
+        <RiCodeAiLine className="size-6" aria-hidden="true" />
+        <span>{site.name}</span>
+      </Link>
 
-          {/* Social Links */}
-          <div className="mr-5 hidden items-center gap-2.5 lg:flex">
-            <SocialLinks />
-          </div>
-
-          {session?.user ? (
-            <Button
-              role="link"
-              className="w-24 cursor-pointer"
-              variant="outline"
-              onClick={() => setToDashboard(true)}
-              render={<Link href="/dashboard" />}
+      {/* Desktop navigation */}
+      <div className="text-muted-foreground hidden items-center divide-x font-medium lg:flex">
+        {navItems.map((item) => {
+          const active = isActive(pathname, item.href)
+          return (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "group relative flex h-full items-center px-7.5 transition-colors",
+                active ? "text-foreground" : "hover:text-foreground",
+              )}
+              onMouseEnter={() => setHovered(item.href)}
+              onMouseLeave={() => setHovered(null)}
             >
-              {toDashboard ? <RiLoaderLine className="animate-spin" /> : "Dashboard"}
-            </Button>
-          ) : (
-            <Access />
-          )}
-
-          <div className="lg:-mr-2.5">
-            <ModeToggle />
-          </div>
-
-          {/* Mobile Navigation */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger
-              render={
-                <Button
-                  className="-mr-2.5 size-8 cursor-pointer lg:hidden [&_svg]:size-4!"
-                  aria-label="Open menu"
-                  size="sm"
-                  variant="outline"
-                />
-              }
-            >
-              <RiMenuLine aria-hidden="true" />
-            </SheetTrigger>
-            <SheetContent side="right">
-              <SheetHeader>
-                <SheetTitle
-                  render={
-                    <Link
-                      href="/"
-                      className="-mt-1 flex items-center gap-2 text-2xl font-bold"
-                      onClick={() => setIsOpen(false)}
-                    />
-                  }
-                >
-                  {site.name}
-                </SheetTitle>
-              </SheetHeader>
-              <nav className="ml-4 flex flex-col gap-5">
-                {navLinks.map((link) => {
-                  const isActive = !link.external && pathname?.startsWith(link.href)
-                  if (link.external) {
-                    return (
-                      <a
-                        key={link.href}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-foreground/60 hover:text-foreground/80 font-medium transition-colors"
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {link.label}
-                        <RiArrowRightUpLine className="-mt-3 inline size-3.5" />
-                      </a>
-                    )
-                  }
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={cn(
-                        "font-medium transition-colors",
-                        isActive
-                          ? "text-foreground"
-                          : "hover:text-foreground/80 text-foreground/60",
-                      )}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  )
-                })}
-                {site.social.github && (
-                  <Button
-                    role="link"
-                    size="sm"
-                    className="mt-2 w-fit"
-                    onClick={() => setIsOpen(false)}
-                    render={
-                      <a href={site.social.github} target="_blank" rel="noopener noreferrer" />
-                    }
-                  >
-                    <RiGithubFill className="size-4" />
-                    Get {site.name}
-                  </Button>
+              {item.name}
+              <span
+                className={cn(
+                  "bg-foreground absolute bottom-0 left-0 h-[2px] transition-all ease-in-out",
+                  active
+                    ? hovered && hovered !== item.href
+                      ? "w-0 duration-1000"
+                      : "w-full duration-500"
+                    : "w-0 duration-1000 group-hover:w-[90%]",
                 )}
-              </nav>
-              {/* Mobile Social Links */}
-              <div className="mt-2.5 ml-4 flex items-center gap-2.5">
-                <SocialLinks onClick={() => setIsOpen(false)} />
-              </div>
-            </SheetContent>
-          </Sheet>
+              />
+            </Link>
+          )
+        })}
+        {socialLinks.map((link) => (
+          <a
+            key={link.href}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
+            className="hover:text-foreground group relative flex aspect-square h-full items-center justify-center"
+          >
+            <link.icon className="size-5" aria-hidden="true" />
+            <RiArrowUpSLine className="absolute top-1 right-1 size-3.5 rotate-45 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            <span className="bg-foreground absolute bottom-0 left-0 h-[2px] w-0 transition-all duration-500 ease-in-out group-hover:w-full" />
+          </a>
+        ))}
+        <div className="flex h-full items-center px-3">
+          <ModeToggle />
         </div>
       </div>
+
+      {/* Mobile navigation */}
+      <Drawer open={open} onOpenChange={setOpen}>
+        <DrawerTrigger
+          className="text-foreground flex h-full w-16 cursor-pointer items-center justify-center border-l lg:hidden"
+          aria-label="Open menu"
+        >
+          <RiMenu4Fill className="size-6" aria-hidden="true" />
+        </DrawerTrigger>
+        <DrawerContent className="lg:hidden">
+          <DrawerHeader className="sr-only">
+            <DrawerTitle>Menu</DrawerTitle>
+            <DrawerDescription>Navigation links</DrawerDescription>
+          </DrawerHeader>
+          <div className="flex flex-col px-6 pt-4 pb-10">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "flex h-14 items-center justify-center font-medium transition-colors",
+                  isActive(pathname, item.href)
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="mt-2 flex h-14 items-center justify-center divide-x border-t">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="text-muted-foreground hover:text-foreground flex h-full w-full items-center justify-center transition-colors"
+                >
+                  <link.icon className="size-6" aria-hidden="true" />
+                </a>
+              ))}
+              <div className="flex h-full w-full items-center justify-center">
+                <ModeToggle />
+              </div>
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
     </header>
   )
 }
