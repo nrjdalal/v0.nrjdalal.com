@@ -1,10 +1,10 @@
 // Brand identity for this app: the single source a fork edits to rebrand. web reads it via lib/config.ts.
 export const site = {
-  name: "V0.nrjdalal.com",
-  description: "V0.nrjdalal.com is just getting started. Tell its story here.",
-  tagline: "Your tagline, ready when you are.",
+  name: "v0.nrjdalal.com",
+  description: "Personal site and blog of Neeraj Dalal.",
+  tagline: "Writing on web development, the tools I use, and the things I build.",
   social: {
-    github: "",
+    github: "https://github.com/nrjdalal",
     x: "",
     discord: "",
   },
