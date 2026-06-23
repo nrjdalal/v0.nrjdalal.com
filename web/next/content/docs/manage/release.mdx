@@ -1,0 +1,111 @@
+---
+slug: /docs/manage/release
+label: Release
+title: Release Management
+description: Automate releases and changelog generation.
+---
+
+import { Step, Steps } from "fumadocs-ui/components/steps"
+
+## Overview
+
+ZeroStarter uses an automated release workflow that manages versioning, changelog generation, and GitHub releases across `canary` (development) and `main` (production). The only manual step is reviewing and merging the auto-created `canary` → `main` pull request; the changelog, version bump, tag, and GitHub release are all produced automatically.
+
+## Prerequisites
+
+<Callout type="warn" title="Required GitHub settings">
+
+A fresh fork's Actions token is read-only by default, so the release workflows get `403 Resource not accessible by integration` and no release PR opens until you grant write access.
+
+</Callout>
+
+Under **Settings → Actions → General → Workflow permissions** (the pre-push hook prints a direct link to this page on your first push):
+
+1. Select **Read and write permissions** so the workflows can create branches, commit the changelog, and tag releases.
+2. Check **Allow GitHub Actions to create and approve pull requests** so `auto-canary-into-main` can open the release PR.
+3. Click **Save**.
+
+![GitHub Workflow permissions: Read and write permissions selected and Allow GitHub Actions to create and approve pull requests checked](/docs/release/workflow-permissions.png)
+
+<Callout title="Fresh forks: push canary into an empty repo">
+
+Create an **empty** GitHub repo (no README, so the first branch you push becomes the default), then:
+
+`git push origin canary`
+
+`canary` is pushed first, so GitHub makes it your default branch. A pre-push hook (`.github/scripts/ensure-remote-main.ts`, wired in `lefthook.yml`) then seeds `main` on your **next** push (a separate ref, so it never collides with your `canary` push), and `auto-canary-into-main` opens the release PR. No `gh` is needed, and the only thing you set by hand is the permissions above.
+
+</Callout>
+
+**Changelog generation**: the release workflow uses `changelogen` to auto-generate the changelog from conventional commits. No additional configuration file is required.
+
+## Feature PRs into canary
+
+Day-to-day work lands on `canary` through feature PRs. **Squash-merge** these so each PR becomes a single commit on `canary`, and delete the branch afterward to keep the remote clean (the `auto-labeler.yml` workflow posts this guidance on every PR opened against `canary`). The merge-commit method is reserved for the `canary` → `main` release PR below, which is what lets `main` keep shared history with `canary`.
+
+## Workflow
+
+The release pipeline spans two workflows. Only the `canary` → `main` PR is reviewed by a human; everything after it is automatic.
+
+<Steps>
+<Step>
+
+### Open the release PR (automatic)
+
+Every push to `canary` runs `auto-canary-into-main.yml`, which opens a draft PR if one is not already open:
+
+- Title: `ci(release): 🚀 merge canary into main`
+- Head: `canary` → Base: `main`
+
+The PR body asks you to **merge with a merge commit (not squash)** so `main` keeps shared history with `canary`.
+
+</Step>
+
+<Step>
+
+### Review and merge into main
+
+Mark the draft ready, review it, and merge it into `main` with a merge commit. Merging triggers `auto-release.yml`, which runs when a PR whose head branch is `canary` is merged into `main`.
+
+</Step>
+
+<Step>
+
+### Changelog, version, and release (automatic)
+
+`auto-release.yml` checks out `canary` directly (there is no separate `changelog` branch, despite the workflow's job being named "Update changelog branch": that name is just a label, and the actual behavior is a direct commit to `canary`) and:
+
+- Generates `CHANGELOG.md` with `changelogen --bump` from the last `v*` tag
+- Bumps the version in `package.json`
+- Refreshes the build-graph snapshot at `.github/assets/graph-build.svg`
+- Commits `ci(changelog): update changelog and bump version` straight onto `canary`
+- Tags `v<version>` and pushes the branch and tag atomically
+- Publishes a GitHub release whose notes mirror the new `CHANGELOG.md` section
+
+The changelog commit is mechanical (generated from already-reviewed PR titles), so it lands directly on `canary` instead of going through another PR. If the commit range contains only filtered-out commit types, the workflow skips the release.
+
+</Step>
+</Steps>
+
+### Build Checks
+
+`auto-check-build.yml` runs on pull requests targeting `canary` or `main` (and on pull request reviews), executing `bun audit --audit-level high`, `bun run lint`, and `bun run build` with `NODE_ENV=production` and `SKIP_ENV_VALIDATION=true`.
+
+The same workflow also runs `auto-labeler.yml`, which adds package/area labels (and merge-method guidance) plus a dynamic approval label (`0/1`, `1/1`, or `APPROVED`) used to gate the release PR.
+
+## Production Deployment
+
+Both `main` and `canary` deploy through Vercel (configured by the `vercel.json` files under `web/next/` and `api/hono/`). Database migrations are not applied by the Next.js build: they run during the API build via `.github/scripts/migrate-on-deploy.ts`, which is invoked from `api/hono/vercel.json`'s `buildCommand` before the API is built.
+
+`migrate-on-deploy.ts` only applies pending Drizzle migrations when `VERCEL_ENV=production` **or** the deploy ref is `canary`; on every other deploy (including PR previews) it logs a skip and exits, so an unmerged migration is never applied against the shared database from a preview. Because the migration runs at build time, a valid `POSTGRES_URL` must be available to the production and `canary` builds (preview builds skip the step and do not need it).
+
+## GitHub Releases
+
+Releases are published automatically by `auto-release.yml`, so there is no manual "Draft a new release" step. After the version bump lands on `canary`, the workflow tags `v<version>` and runs `gh release create` with notes extracted from the matching `CHANGELOG.md` section, which includes:
+
+- Version header with a compare-changes link
+- Categorized changes (📖 Documentation, 🏡 Chore, etc.)
+- Commit links with hashes
+- Contributor credits
+
+If a previous run pushed the tag but failed before publishing, the next run backfills the missing GitHub release for that tag.

@@ -1,0 +1,178 @@
+---
+slug: /docs/manage/authentication
+label: Auth & Organizations
+title: Authentication
+description: Authentication system with Better Auth, supporting OAuth providers, organizations, teams, and role-based access.
+---
+
+## Overview
+
+ZeroStarter uses [Better Auth](https://better-auth.com) for authentication, configured in the `@packages/auth` package. It supports multiple sign-in methods, multi-tenant organizations with teams, and session management with cross-subdomain cookie support. The Better Auth OpenAPI plugin is also enabled, exposing an auth API reference at `/api/auth/reference`.
+
+## Sign-In Methods
+
+### Magic Link
+
+The sign-in UI can show an email magic-link flow (`authClient.signIn.magicLink`, registered via the `magicLinkClient()` plugin in `web/next/src/lib/auth/client.ts`). The server-side `magicLink` plugin and its email sender are not enabled by default, so the email field is **hidden** until you wire it up rather than shown as a dead control: `packages/auth/src/index.ts` derives `magicLinkEnabled` from whether the `magicLink` plugin is registered, the public `GET /api/auth/providers` route lists `magic-link` among the enabled providers when it is, and `web/next/src/components/access.tsx` renders the email field only when `magic-link` is present. To turn it on, add the `magicLink` plugin to the `plugins` array in `packages/auth/src/index.ts` (which flips `magicLinkEnabled` automatically) and implement `sendMagicLink` to deliver the email.
+
+### OAuth Providers
+
+Two social providers are supported, and each is **optional**: a provider registers only when both of its credentials are present, so a fork can ship with GitHub, Google, both, or neither (relying on magic link).
+
+- **GitHub**: set `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`
+- **Google**: set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`
+
+`packages/auth/src/index.ts` builds `socialProviders` conditionally from those env vars and exports `enabledSocialProviders` (the providers that are actually configured) plus `enabledProviders` (those plus `magic-link` when enabled). The public `GET /api/auth/providers` route (`api/hono/src/routers/auth.ts`) returns `enabledProviders`, and the sign-in UI (`web/next/src/components/access.tsx`) fetches it to render only the buttons for configured providers. Toggling either built-in provider is therefore just an env change; the UI follows automatically. Adding a brand-new provider also takes a small code change (see below).
+
+<Callout type="warn">
+
+A deployed fork with no OAuth providers and no magic link renders a "No sign-in options are configured yet." message in the sign-in dialog (the local-only agent sign-in is hidden in production). Configure at least one provider, or wire up magic link, before shipping a login surface.
+
+</Callout>
+
+The auth config does not set a redirect for the social providers. The post-authentication redirect is driven by the `callbackURL` passed to the client sign-in call.
+
+### Agent Sign-In (local only)
+
+For local development and AI agents, `POST /api/agents/sign-in-as` signs in as a fixed `AgentZero` user (`agent@zerostarter.dev`) and mints a session cookie directly. It is gated to the `local` environment and a trusted `Origin` header. See `api/hono/src/routers/agents.ts`.
+
+### Adding OAuth Providers
+
+1. Create OAuth credentials with the provider
+2. Add the client ID and secret to your `.env` file
+3. Add the variables to `packages/env/src/auth.ts` as `.optional()` (so the app still boots without them)
+4. Register the provider conditionally in `packages/auth/src/index.ts`, extend the `SocialProvider` union with its key, and add it to `enabledSocialProviders` so the route advertises it:
+
+```ts
+socialProviders: {
+  ...(env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET
+    ? { github: { clientId: env.GITHUB_CLIENT_ID, clientSecret: env.GITHUB_CLIENT_SECRET } }
+    : {}),
+  ...(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET
+    ? { google: { clientId: env.GOOGLE_CLIENT_ID, clientSecret: env.GOOGLE_CLIENT_SECRET } }
+    : {}),
+},
+```
+
+5. Add a button for it in `web/next/src/components/access.tsx`, gated on the provider appearing in the fetched list (copy the GitHub/Google blocks and swap the icon). Skipping this leaves the provider enabled server-side with no button to trigger it.
+
+## Console Access
+
+The privileged `/console` area uses the [Better Auth Admin plugin](https://www.better-auth.com/docs/plugins/admin) (`packages/auth/src/index.ts`), which adds a `role` column plus `banned`/`banReason`/`banExpires` to the `user` table and an `impersonatedBy` column to the `session` table (`packages/db/src/schema/auth.ts`). The `impersonatedBy` field is set when an admin impersonates another user, recording the acting admin's id on the impersonated session. The guard in `web/next/src/lib/auth/console.ts` grants access only when `user.role === "admin"`; everyone else stays on the default `user` role and gets a `notFound()`. The guard reads the session with `disableCookieCache`, so a grant or revoke takes effect on the next request rather than waiting out the session cache.
+
+There is no env-based access list: the `role` is the single source of truth, set explicitly:
+
+- **Helper script (manual):** `bun run console:roles grant you@example.com` (also `revoke <email>` and `list`), backed by `.github/scripts/console-roles.ts`. It writes `user.role` directly via `POSTGRES_URL`. Use this to bootstrap the first admin.
+- **Or** `bun run db:studio` / `UPDATE "user" SET role = 'admin' WHERE email = '…';`.
+- **Or**, once an admin exists, the Better Auth `setRole` admin API to grant the role to other users (a console user-management UI is not built yet).
+
+For reference, the local agent sign-in route (`api/hono/src/routers/agents.ts`) sets `role: "admin"` on the `AgentZero` user for local development.
+
+## Organizations & Teams
+
+The [Better Auth Organizations plugin](https://www.better-auth.com/docs/plugins/organization) provides multi-tenant support.
+
+### Features
+
+- **Organization creation**: Users can create organizations from the dashboard sidebar
+- **Organization switching**: Switch between organizations via the sidebar dropdown
+- **Last used org persistence**: The last selected organization is saved in a cookie and restored on next login
+- **Teams**: Teams can be created within organizations
+- **Member roles**: Members have roles (default: "member") within organizations
+- **Invitations**: Invite users to organizations via email
+
+### Database Schema
+
+The organization system adds these tables:
+
+| Table          | Purpose                                                             |
+| -------------- | ------------------------------------------------------------------- |
+| `organization` | Organization metadata (`name`, `slug`, `logo`)                      |
+| `member`       | Links users to organizations with a `role`                          |
+| `team`         | Teams within an organization                                        |
+| `teamMember`   | Links users to teams                                                |
+| `invitation`   | Pending org invitations with `status`, `email`, `role`, `expiresAt` |
+
+The `session` table includes `activeOrganizationId` and `activeTeamId` fields to track the current context.
+
+### Client Usage
+
+```ts
+import { authClient } from "@/lib/auth/client"
+
+// List user's organizations
+const { data: orgs } = authClient.useListOrganizations()
+
+// Get active organization
+const { data: activeOrg } = authClient.useActiveOrganization()
+
+// Switch organization
+await authClient.organization.setActive({ organizationId: "..." })
+
+// Create organization
+await authClient.organization.create({ name: "Acme Inc.", slug: "acme" })
+```
+
+## Session Management
+
+Sessions are stored in the `session` database table with:
+
+- **Token-based authentication** via secure cookies
+- **Cross-subdomain cookies**: Automatically configured when using subdomains
+- **IP address and user agent tracking** for security
+- **Session expiration** with automatic cleanup
+- **Cookie cache**: `session.cookieCache` is enabled with `maxAge: 300` (`packages/auth/src/index.ts`), so the session is cached for about 5 minutes. The auth middleware (`api/hono/src/middlewares/auth.ts`) forwards the `session_data` cookie to prime this cache.
+
+<Callout type="warn">
+
+The 5-minute cookie cache means a role grant or revoke can take up to about 5 minutes to take effect unless the session is revoked.
+
+</Callout>
+
+### Server-Side Session Access
+
+In Next.js server components and layouts:
+
+```ts
+import { auth } from "@/lib/auth"
+
+const session = await auth.api.getSession()
+if (!session?.user) redirect("/")
+```
+
+### Client-Side Session Access
+
+```ts
+import { authClient } from "@/lib/auth/client"
+
+const { data: session } = authClient.useSession()
+```
+
+## Protected Routes
+
+The `(protected)` layout in `web/next/src/app/(protected)/layout.tsx` handles route protection server-side. It checks for a valid session and redirects unauthenticated users to the home page.
+
+API routes are protected using the auth middleware in `api/hono/src/middlewares/auth.ts`, which validates the session from request headers.
+
+## Rate Limiting
+
+API routes are rate-limited using `hono-rate-limiter` with [Arcjet IP](https://arcjet.com) detection.
+
+| Setting             | Default          | Environment Variable        |
+| ------------------- | ---------------- | --------------------------- |
+| Requests per window | 60               | `HONO_RATE_LIMIT`           |
+| Window duration     | 60,000ms (1 min) | `HONO_RATE_LIMIT_WINDOW_MS` |
+
+Authenticated requests use a per-user limiter set to twice the configured limit (`HONO_RATE_LIMIT * 2`, 120 by default). Rate limit keys are resolved in order: authenticated user ID, API key, IP address, then a random UUID fallback when IP detection fails. The API-key tier is currently unwired (no limiter passes an API key, so that tier is effectively dead until you wire `getApiKey` into a limiter). See [API Conventions](/docs/manage/api-conventions) for the authoritative breakdown.
+
+## Environment Variables
+
+| Variable               | Description                                               |
+| ---------------------- | --------------------------------------------------------- |
+| `BETTER_AUTH_SECRET`   | Secret key for signing tokens (`openssl rand -base64 32`) |
+| `GITHUB_CLIENT_ID`     | GitHub OAuth app client ID (optional)                     |
+| `GITHUB_CLIENT_SECRET` | GitHub OAuth app client secret (optional)                 |
+| `GOOGLE_CLIENT_ID`     | Google OAuth client ID (optional)                         |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret (optional)                     |
+| `HONO_APP_URL`         | Backend URL (used as Better Auth base URL)                |
+| `HONO_TRUSTED_ORIGINS` | Allowed CORS origins                                      |
